@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { EmbedBuilder, PermissionsBitField } = require('discord.js')
-const { commandMetrics } = require('../features/miscFunctions.js')
+const { commandMetrics } = require('../functions.js')
 const locale = require('../locale/en.json')
 const SQLite = require("better-sqlite3");
 const sql = new SQLite('./bot.sqlite');

@@ -1,3 +1,7 @@
+const SQLite = require("better-sqlite3");
+const sql = new SQLite('../bot.sqlite');
+const sql1 = new SQLite('.../globalDBs/commandMetrics.sqlite');
+
 module.exports = {
   disableFeature: function(featureName, allowAdmin) {
         //Add logic to disable a feature using a "features" table

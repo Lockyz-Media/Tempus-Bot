@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, Message, ButtonStyle } = require('discord.js')
 const { commandMetrics } = require('../functions.js')
-const { embedColor, ownerID } = require('../config');
+const { embedColours, ownerID } = require('../config');
 const SQLite = require("better-sqlite3");
 const messageCreate = require('../events/messageCreate');
 const sql = new SQLite('./bot.sqlite');
@@ -57,7 +57,7 @@ module.exports = {
 			let i = 1;
 
 			const embed = new EmbedBuilder()
-				.setColor(embedColor)
+				.setColor(embedColours.main)
 				.setTitle("Leaderboard")
 				.setDescription("Discord.js changed the way embeds are made, we have not worked out how to make this command work with that feature just yet.\nIf you would like to view your points use /userinfo instead for now.")
 

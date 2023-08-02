@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require('discord.js');
-const { embedcolours, ownerID } = require('../config');
+const { embedColours, ownerID } = require('../config');
 
 module.exports = {
 	name: 'channelCreate',

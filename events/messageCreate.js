@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require('discord.js');
-const { embedColor, ownerID } = require('../config');
+const { embedColours, ownerID } = require('../config');
 const SQLite = require("better-sqlite3");
 const humanizeDuration = require('humanize-duration');
 const sql = new SQLite('./bot.sqlite');
@@ -18,7 +18,7 @@ module.exports = {
         if(message.channel.id === '875652753924448306') {
             if(message.author.id === '835394949612175380') {
                 const embed = new EmbedBuilder()
-                    .setColor(embedColor)
+                    .setColor(embedColours.lockyzdev)
                     .setDescription(message.cleanContent)
                 client.channels.cache.get(logsID).send({ content: "# New message from Lockyz Dev", embeds: [embed] })
             }
@@ -48,7 +48,7 @@ module.exports = {
                     const embed = new EmbedBuilder()
                         .setDescription("A user named <@"+message.author.id+"> has gone through the user verification system.")
                         //.setTitle('Member Verified | '+message.member.username)
-                        .setColor(embedColor)
+                        .setColor(embedColours.positive)
                         .setFooter({ text: 'User ID '+ message.author.id })
                         .setTimestamp();
                     client.channels.cache.get(logsID).send({ embeds: [embed] })
@@ -70,7 +70,7 @@ module.exports = {
                                     return;
                         }
                         const logEmbed = new EmbedBuilder()
-                            .setColor(embedColor)
+                            .setColor(embedColours.negative)
                             if(message.member.kickable) {
                                 logEmbed.setDescription('A message by <@'+message.user.id+"> has content matching the Nitro Scam filter. The message has been deleted and the user timed out.")
                             } else {
@@ -123,7 +123,7 @@ module.exports = {
                     const embed = new EmbedBuilder()
                     //.setTitle('🎉 LEVEL UP 🎉')
                     .setDescription('🎉🎉 Congratulations **'+message.member.username+'**, you\'ve earnt a total of **'+nFormatter(score.points, 2)+'**, which is enough for **Level '+nFormatter(curLevel, 0)+'** 🎉🎉')
-                    .setColor(embedColor)
+                    .setColor(embedColours.positive)
                     //.setFooter({ text: 'This message can be turned off with the `/usersettings` command' })
                     .setTimestamp()
                 message.channel.send({ embeds: [embed] });

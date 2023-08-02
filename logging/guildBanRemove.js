@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require('discord.js');
-const { embedColor, ownerID } = require('../config');
+const { embedColours, ownerID } = require('../config');
 
 module.exports = {
 	name: 'guildBanRemove',
@@ -21,7 +21,7 @@ module.exports = {
 			}
 
 		const embed = new EmbedBuilder()
-			.setColor(embedColor)
+			.setColor(embedColours.negative)
 			.setDescription("A user named "+ban.user.username+" was unbanned"+banReason)
 			embed.setTimestamp()
 			embed.setFooter({ text: 'Ban ID '+'Currently Unavailable' })

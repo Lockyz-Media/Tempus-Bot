@@ -16,6 +16,8 @@ module.exports = {
 			.setDescription("A role named "+role.name+" was deleted.")
 			if(role.color) {
 				embed.setColor(role.color)
+			} else {
+				embed.setColor(embedColours.negative)
 			}
 			embed.setFooter({ text: 'Role ID '+ role.id })
 			embed.setTimestamp();

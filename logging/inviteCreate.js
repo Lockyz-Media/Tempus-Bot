@@ -19,9 +19,7 @@ module.exports = {
 		}
 		var inviter
 		
-		if(invite.inviter.displayName) {
-		    inviter = invite.inviter.displayName
-		} else if(invite.inviter.username) {
+		if(invite.inviter.username) {
 		    inviter = invite.inviter.username
 		} else {
 		    inviter = ""

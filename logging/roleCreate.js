@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require('discord.js');
-const { embedColor, ownerID } = require('../config');
+const { embedColours, ownerID } = require('../config');
 
 module.exports = {
 	name: 'roleCreate',
@@ -16,6 +16,8 @@ module.exports = {
 			.setDescription("A role named "+role.name+" was created. <@&"+role.id+">")
 			if(role.color) {
 				embed.setColor(role.color)
+			} else {
+				embed.setColor(embedColours.positive)
 			}
 			embed.setFooter({ text: 'Role ID '+ role.id})
 			embed.setTimestamp();

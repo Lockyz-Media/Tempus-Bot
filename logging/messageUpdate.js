@@ -42,7 +42,7 @@ module.exports = {
 		if(newMessage.cleanContent.length > 1024) {
 			const embed2 = new EmbedBuilder()
 				.setTitle("Message Content")
-				.setColor(embedColor)
+				.setColor(embedColours.neutral)
 				.setDescription(newMessage.cleanContent)
 			client.channels.cache.get(logsID).send({ embeds: [embed2] })
 		}

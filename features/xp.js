@@ -6,6 +6,7 @@ module.exports = {
   givexp: function(client, xp, userid, guildid) {
         client.getScore = sql.prepare("SELECT * FROM scores WHERE user = ? AND guild = ?");
         client.setScore = sql.prepare("INSERT OR REPLACE INTO scores (id, user, guild, points, level) VALUES (@id, @user, @guild, @points, @level);");
+        //var response = new Object();
 
         let score;
         score = client.getScore.get(userid, guildid);
@@ -13,20 +14,53 @@ module.exports = {
         if (!score) {
             score = { id: `${guildid}-${userid}`, user: userid, guild: guildid, points: 1, level: 0};
         }
+        var oldS = score.points;
+        //response['oldScore'] = score.points;
 
         score.points += xp;
+        //response['newScore'] = score.points;
 
         const curLevel = Math.floor(0.1 * Math.sqrt(score.points));
+        var oldL = score.level;
+        var newL = curLevel;
+
+        var levelup = false;
         
         if(score.level < curLevel) {
             score.level = curLevel;
             client.setScore.run(score);
-            return "levelUp";
+            //response['levelUp'] = 'true'
+            levelup = true
         } else {
             client.setScore.run(score);
-            return true;
+            //response['levelUp'] = 'false';
+            levelup = false
+        }
+        //return response;
+        return {
+          'oldScore': oldS,
+          'newScore': score.points,
+          'oldLevel': oldL,
+          'newLevel': newL,
+          'isLevelUp': levelup
         }
     },
+
+  getxp: function(client, userid, guildid) {
+    client.getScore = sql.prepare("SELECT * FROM scores WHERE user = ? AND guild = ?");
+    let score;
+    score = client.getScore.get(userid, guildid);
+
+    if (!score) {
+        score = { id: `${guildid}-${userid}`, user: userid, guild: guildid, points: 1, level: 0};
+    }
+    return {
+      score: score.points,
+      level: score.level,
+      userid: score.user,
+      guildid: score.guild
+    }
+  },
 
   takexp: function(client, xp, userid, guildid) {
         console.log("Taking points uwu")

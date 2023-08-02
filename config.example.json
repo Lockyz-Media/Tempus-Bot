@@ -1,5 +1,12 @@
 {
 	"embedColor": "#86C1FD",
+	"embedColours": [
+		"positive": "",
+		"negative": "",
+		"neutral": "",
+		"main": "",
+		"secondary": "",
+	],
 	"ownerID": "OWNER ID",
 	"clientId": "CLIENT ID",
 	"guildId": "GUILD ID",

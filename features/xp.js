@@ -1,3 +1,7 @@
+const SQLite = require("better-sqlite3");
+const sql = new SQLite('../bot.sqlite');
+const sql1 = new SQLite('.../globalDBs/commandMetrics.sqlite');
+
 module.exports = {
   givexp: function(client, xp, userid, guildid) {
         client.getScore = sql.prepare("SELECT * FROM scores WHERE user = ? AND guild = ?");

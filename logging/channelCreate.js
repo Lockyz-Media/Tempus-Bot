@@ -62,7 +62,7 @@ module.exports = {
 		}
 		
 		const embed = new EmbedBuilder()
-			.setColor(embedcolours.positive)
+			.setColor(embedColours.positive)
 			if(isThread) {
 				embed.setDescription("A thread named "+channel.name)
 			} else {

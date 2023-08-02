@@ -1,5 +1,5 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, Message, ButtonStyle } = require('discord.js');
-const { embedColor, ownerID } = require('../config');
+const { embedColours, ownerID } = require('../config');
 
 module.exports = {
 	name: 'messageUpdate',
@@ -28,7 +28,7 @@ module.exports = {
 					.setURL(newMessage.url)
 			)
 		const embed0 = new EmbedBuilder()
-			.setColor(embedColor)
+			.setColor(embedColours.neutral)
 			.setDescription("A message by <@"+oldMessage.author.id+"> in <#"+newMessage.channel.id+"> was edited.")
 			.setColor(embedColor)
 			if(newMessage.cleanContent.length > 1024) {

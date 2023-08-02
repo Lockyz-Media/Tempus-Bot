@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, Message, ButtonStyle } = require('discord.js')
-const { commandMetrics } = require('../functions.js')
+const { commandMetrics } = require('../features/miscFunctions.js')
 const { embedColor, ownerID } = require('../config');
 const SQLite = require("better-sqlite3");
 const messageCreate = require('../events/messageCreate');

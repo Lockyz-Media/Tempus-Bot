@@ -1,11 +1,11 @@
 {
 	"embedColor": "#86C1FD",
 	"embedColours": [
-		"positive": "",
-		"negative": "",
-		"neutral": "",
-		"main": "",
-		"secondary": "",
+		"positive": "#00FF1C",
+		"negative": "#FF0000",
+		"neutral": "#9013FE",
+		"main": "#86C1FD",
+		"secondary": "#50E3C2",
 	],
 	"ownerID": "OWNER ID",
 	"clientId": "CLIENT ID",

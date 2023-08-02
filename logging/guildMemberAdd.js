@@ -2,7 +2,7 @@ const { EmbedBuilder, Message, AttachmentBuilder } = require('discord.js');
 const { createCanvas, Image, GlobalFonts } = require('@napi-rs/canvas');
 const { readFile } = require('fs/promises');
 const { request } = require('undici');
-const { embedColor, ownerID } = require('../config');
+const { embedColours, ownerID } = require('../config');
 
 module.exports = {
 	name: 'guildMemberAdd',
@@ -110,7 +110,7 @@ module.exports = {
 		const attachment = new AttachmentBuilder(canvas.toBuffer('image/png'), { name: 'profile-image.png' });
 
 		const embed = new EmbedBuilder()
-			.setColor(embedColor)
+			.setColor(embedColours.positive)
 			.setDescription("A user named <@"+user.id+"> joined the server.")
 			.setFooter({ text: 'User ID '+ user.id })
 			.setTimestamp();

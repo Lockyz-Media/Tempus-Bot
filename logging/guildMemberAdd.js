@@ -46,7 +46,7 @@ module.exports = {
 				font: "Pokemon",
 				colour: "#e2c522",
 				borderColour: "#3e6ab4",
-				text: "Welcome, "+member.displayName,
+				text: "Welcome, "+member.username,
 			},
 			subtitle: {
 				x: canvas.width / 2,

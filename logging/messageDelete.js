@@ -32,7 +32,7 @@ module.exports = {
 		if(message.cleanContent.length > 1024) {
 			const embed1 = new EmbedBuilder()
 				.setTitle("Message Deleted | Message Content")
-				//.setColor(embedColor)
+				.setColor(embedColours.negative)
 				.setDescription(message.cleanContent)
 			client.channels.cache.get(logsID).send({ embeds: [embed1] })
 		}

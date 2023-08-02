@@ -3,6 +3,24 @@ const sql = new SQLite('./bot.sqlite');
 const sql1 = new SQLite('../globalDBs/commandMetrics.sqlite');
 
 module.exports = {
+    disableFeature: function(featureName, allowAdmin) {
+        //Add logic to disable a feature using a "features" table
+    },
+    disableCommand: function(commandName, allowAdmin, unpush) {
+        //Add logic to disable a command using a "commands" table
+    },
+    enableFeature: function(featureName) {
+        //Add logic to enable a feature using a "features" table
+    },
+    enableCommand: function(commandName, push) {
+        //Add logic to enable a command using a "commands" table
+    },
+    queryFeature: function(featureName) {
+        //Add logic to check whether a feature is enabled/disabled
+    },
+    queryCommand: function(commandName) {
+        //Add logic to check whether a command is enabled/disabled
+    },
     givexp: function(client, xp, userid, guildid) {
         client.getScore = sql.prepare("SELECT * FROM scores WHERE user = ? AND guild = ?");
         client.setScore = sql.prepare("INSERT OR REPLACE INTO scores (id, user, guild, points, level) VALUES (@id, @user, @guild, @points, @level);");

@@ -11,6 +11,7 @@ const types = require('../assets/js/types.js');
 //const types1 = require('../assets/js/types1.js');
 //const types2 = require('../assets/js/types2.js');
 const types3 = require('../assets/js/types.js');
+const dismondb = require('dismondb')
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -199,169 +200,17 @@ module.exports = {
         }
         if(interaction.options.getSubcommand() === 'typedex') {
             const type = interaction.options.getString('type').toLowerCase();
-            const version = interaction.options.getString('version')
+            //const version = interaction.options.getString('version')
+		const teep = dismondb.typedex(type, 4)
 
-                for(var i=0;i<types3.length;i++){
-                    if(type == types3[i].name.toLowerCase()){
-                        const link = type
-
-                        const embed1 = new MessageEmbed()
-                            .setTitle(`Typedex V3 | Information | `+types3[i].name)
-                            .setThumbnail("https://dbbackup.lockyzdev.net/botcommands/typedex/"+link+".png")
-                            .addFields([
-                                { name: "Name", value: types3[i].name, inline: true },
-                                { name: "Gen Added", value: types3[i].genAdded, inline: true },
-                                { name: "Estimated Pokemon Count", value: types3[i].pokemonCount, inline: true },
-                                { name: "Table of Contents", value: "Page Two: Current Typemap\nPage Three: Gen One Typemap\nPage Four: Gen Two-Five Typemap\nPage Five: Average Stats" }
-                            ])
-
-                        const embed2 = new MessageEmbed()
-                            .setTitle(`Typedex V3 | Current Typemap | `+types3[i].name)
-                            .setThumbnail("https://dbbackup.lockyzdev.net/botcommands/typedex/"+link+".png")
-                            if(types3[i].attackTypemap.noEffect === "None")
-                            {
-                                embed2.addFields({ name: "**No Effect Against**", value: "Nothing", inline: true })
-                            } else {
-                                embed2.addFields({ name: "**No Effect Towards**", value: types3[i].attackTypemap.noEffect, inline: true })
-                            }
-                            if(types3[i].attackTypemap.notVeryEffective === "None") {
-                                embed2.addFields({ name: "**Not Very Effect Against**", value: "Nothing", inline: true })
-                            } else {
-                                embed2.addFields({ name: "**Not Very Effect Towards**", value: types3[i].attackTypemap.notVeryEffective, inline: true })
-                            }
-                            if(types3[i].attackTypemap.superEffective === "None") {
-                                embed2.addFields({ name: "**Super Effect Against**", value: "Nothing", inline: true })
-                            } else {
-                                embed2.addFields({ name: "**Super Effect Towards**", value: types3[i].attackTypemap.superEffective, inline: true })
-                            }
-                            if(types3[i].defenceTypemap.noEffect === "None")
-                            {
-                                embed2.addFields({ name: "**No Effect From**", value: "Nothing", inline: true })
-                            } else {
-                                embed2.addFields({ name: "**No Effect From**", value: types3[i].defenceTypemap.noEffect, inline: true })
-                            }
-                            if(types3[i].defenceTypemap.notVeryEffective === "None") {
-                                embed2.addFields({ name: "**Not Very Effective From**", value: "Nothing", inline: true })
-                            } else {
-                                embed2.addFields({ name: "**Not Very Effective From**", value: types3[i].defenceTypemap.notVeryEffective, inline: true })
-                            }
-                            if(types3[i].defenceTypemap.superEffective === "None") {
-                                embed2.addFields({ name: "**Super Effective From**", value: "Nothing", inline: true })
-                            } else {
-                                embed2.addFields({ name: "**Super Effective From**", value: types3[i].defenceTypemap.superEffective, inline: true })
-                            }
-
-                        const embed3 = new MessageEmbed()
-                            .setTitle(`Typedex V3 | Gen 1 Typemap | `+types3[i].name)
-                            .setThumbnail("https://dbbackup.lockyzdev.net/botcommands/typedex/"+link+".png")
-                            if(types3[i].genOneAttackTypemap.noEffect === "None")
-                            {
-                                embed3.addField(`**No Effect Towards**`, 'Nothing', true)
-                            } else {
-                                embed3.addField(`**No Effect Towards**`, types3[i].genOneAttackTypemap.noEffect, true)
-                            }
-                            if(types3[i].genOneAttackTypemap.notVeryEffective === "None") {
-                                embed3.addField(`**Not Very Effective Against**`, 'Nothing', true)
-                            } else {
-                                embed3.addField(`**Not Very Effective Against**`, types3[i].genOneAttackTypemap.notVeryEffective, true)
-                            }
-                            if(types3[i].genOneAttackTypemap.superEffective === "None") {
-                                embed3.addField(`**Super Effective Against**`, 'Nothing', true)
-                            } else {
-                                embed3.addField(`**Super Effective Against**`, types3[i].genOneAttackTypemap.superEffective, true)
-                            }
-                            if(types3[i].genOneDefenseTypemap.noEffect === "None")
-                            {
-                                embed3.addField(`**No Effect From**`, 'Nothing', true)
-                            } else {
-                                embed3.addField(`**No Effect From**`, types3[i].genOneDefenseTypemap.noEffect, true)
-                            }
-                            if(types3[i].genOneDefenseTypemap.notVeryEffective === "None") {
-                                embed3.addField(`**Not Very Effective From**`, 'Nothing', true)
-                            } else {
-                                embed3.addField(`**Not Very Effective From**`, types3[i].genOneDefenseTypemap.notVeryEffective, true)
-                            }
-                            if(types3[i].genOneDefenseTypemap.superEffective === "None") {
-                                embed3.addField(`**Super Effective From**`, 'Nothing', true)
-                            } else {
-                                embed3.addField(`**Super Effective From**`, types3[i].genOneDefenseTypemap.superEffective, true)
-                            }
-
-                        const embed4 = new MessageEmbed()
-                            .setTitle(`Typedex V3 | Gen 2-5 Typemap | `+types3[i].name)
-                            .setThumbnail("https://dbbackup.lockyzdev.net/botcommands/typedex/"+link+".png")
-                            if(types3[i].genTwoFiveAttackTypemap.noEffect === "None")
-                            {
-                                embed4.addFields({ name: `**No Effect Towards**`, value: 'Nothing', inline: true })
-                            } else {
-                                embed4.addFields({ name: `**No Effect Towards**`, value: types3[i].genTwoFiveAttackTypemap.noEffect, inline: true })
-                            }
-                            if(types3[i].genTwoFiveAttackTypemap.notVeryEffective === "None") {
-                                embed4.addFields({ name: `**Not Very Effective Against**`, value: 'Nothing', inline: true })
-                            } else {
-                                embed4.addFields({ name: `**Not Very Effective Against**`, value: types3[i].genTwoFiveAttackTypemap.notVeryEffective, inline: true })
-                            }
-                            if(types3[i].genTwoFiveAttackTypemap.superEffective === "None") {
-                                embed4.addFields({ name: `**Super Effective Against**`, value: 'Nothing', inline: true })
-                            } else {
-                                embed4.addFields({ name: `**Super Effective Against**`, value: types3[i].genTwoFiveAttackTypemap.superEffective, inline: true })
-                            }
-                            if(types3[i].genTwoFiveDefenseTypemap.noEffect === "None")
-                            {
-                                embed4.addFields({ name: `**No Effect From**`, value: 'Nothing', inline: true })
-                            } else {
-                                embed4.addFields({ name: `**No Effect From**`, value: types3[i].genTwoFiveDefenseTypemap.noEffect, inline: true })
-                            }
-                            if(types3[i].genTwoFiveDefenseTypemap.notVeryEffective === "None") {
-                                embed4.addFields({ name: `**Not Very Effective From**`, value: 'Nothing', inline: true })
-                            } else {
-                                embed4.addFields({ name: `**Not Very Effective From**`, value: types3[i].genTwoFiveDefenseTypemap.notVeryEffective, inline: true })
-                            }
-                            if(types3[i].genTwoFiveDefenseTypemap.superEffective === "None") {
-                                embed4.addFields({ name: `**Super Effective From**`, value: 'Nothing', inline: true })
-                            } else {
-                                embed4.addFields({ name: `**Super Effective From**`, value: types3[i].genTwoFiveDefenseTypemap.superEffective, inline: true })
-                            }
-                        const embed5 = new MessageEmbed()
-                            .setTitle(`Typedex V3 | Average Stats | `+types3[i].name)
-                            .setThumbnail("https://dbbackup.lockyzdev.net/botcommands/typedex/"+link+".png")
-                            .addFields([
-                                { name: "HP", value: types3[i].statAverages.hp, inline: true },
-                                { name: "Attack", value: types3[i].statAverages.attack, inline: true },
-                                { name: "Defense", value: types3[i].statAverages.defense, inline: true },
-                                { name: "SP. Attack", value: types3[i].statAverages.spAttack, inline: true },
-                                { name: "SP Defense", value: types3[i].statAverages.spDefense, inline: true },
-                                { name: "Speed", value: types3[i].statAverages.speed, inline: true },
-                            ])
-
-                        const button1 = new MessageButton()
-                            .setCustomId('previousbtn')
-                            .setLabel('Previous')
-                            .setStyle('DANGER');
-    
-                        const button2 = new MessageButton()
-                            .setCustomId('nextbtn')
-                            .setLabel('Next')
-                            .setStyle('SUCCESS');
-
-                        pages = [
-                            embed1,
-                            embed2,
-                            embed3,
-                            embed4,
-                            embed5,
-                        ];
-                            
-                        //create an array of buttons
-                            
-                        buttonList = [
-                            button1,
-                            button2
-                        ]
-        
-                        return paginationEmbed(interaction, pages, buttonList);
-                    }
-                }
+		const embed1 = new MessageEmbed()
+			.setTitle('Typedex | Information | '+teep.name.en
+			.setThumbnail(teep.images.icon)
+			.addFields([
+				{ name: "Gen Added", value: teep.genAdded, inline: true },
+				{ name: "Estimated Pokemon Count", value: teep.counters.pokemon.total, inline: true },
+			])
+		interaction.reply({ embeds [embed1] })
         }
         if(interaction.options.getSubcommand() === 'itemdex') {
             const item = interaction.options.getString('item').toLowerCase();

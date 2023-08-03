@@ -1,6 +1,5 @@
-const { SlashCommandBuilder, AttachmentBuilder } = require('@discordjs/builders');
 const { commandMetrics } = require('../functions.js')
-const { EmbedBuilder } = require('discord.js')
+const { EmbedBuilder, SlashCommandBuilder } = require('discord.js')
 const locale = require('../locale/en.json')
 const SQLite = require("better-sqlite3");
 const sql = new SQLite('./bot.sqlite');
@@ -8,21 +7,45 @@ const sql = new SQLite('./bot.sqlite');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('8ball')
+		.setDMPermission(false)
+		/*.setNameLocalizations({
+			pl: 'pies',
+			de: 'hund',
+		})*/
 		.setDescription('Ask the 8ball a question and get an answer STRAIGHT from the cosmos. (Results Vary)')
+		/*.setDescriptionLocalizations({
+			pl: 'Rasa psa',
+			de: 'Hunderasse',
+		})*/
 		.addStringOption((option) => 
-			option
-				.setName('question')
-				.setDescription('The important question you want answered.')
-				.setRequired(true)
+			option.setName('question')
+			/*.setNameLocalizations({
+				pl: 'pies',
+				de: 'hund',
+			})*/
+			.setDescription('The important question you want answered.')
+			/*.setDescriptionLocalizations({
+				pl: 'Rasa psa',
+				de: 'Hunderasse',
+			})*/
+			.setRequired(true)
+			.setMaxLength(200))
 		)
-        .addStringOption((option) => 
-			option
-				.setName('drink')
-				.setDescription('Drink the blue liquid inside?')
-				.setRequired(true)
-                .addChoices(
-                    { name: 'Yes', value: 'true' },
-                    { name: 'No', value: 'false' },
+        	.addStringOption((option) => 
+			option.setName('drink')
+			/*.setNameLocalizations({
+				pl: 'pies',
+				de: 'hund',
+			})*/
+			.setDescription('Drink the blue liquid inside?')
+			/*.setDescriptionLocalizations({
+				pl: 'Rasa psa',
+				de: 'Hunderasse',
+			})*/
+			.setRequired(true)
+                	.addChoices(
+                    		{ name: 'Yes', value: 'true' },
+                    		{ name: 'No', value: 'false' },
                 )),
 	async execute(interaction) {
         const client = interaction.client

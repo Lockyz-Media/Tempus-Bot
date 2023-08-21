@@ -3,7 +3,7 @@ Tempus bot is a bot created by Lockyz Dev for the Pixelmon Tempus Discord Server
 
 ## Version Information
 - [Based on a modified version of Bit 3.0.0](https://github.com/Lockyz-Dev/bit-core)
-- Discord.js: v14
+- Discord.js: v14.13.0
 
 ## Prerequisites
 - node.js v14.21.1

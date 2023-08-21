@@ -5,6 +5,11 @@ Tempus bot is a bot created by Lockyz Dev for the Pixelmon Tempus Discord Server
 - [Based on a modified version of Bit 3.0.0](https://github.com/Lockyz-Dev/bit-core)
 - Discord.js: v14.13.0
 
+## Node Modules
+- discord.js: v14.13.0
+- DismonDB
+- better-sqlite3
+
 ## Prerequisites
 - node.js v14.21.1
 - npm
@@ -12,7 +17,7 @@ Tempus bot is a bot created by Lockyz Dev for the Pixelmon Tempus Discord Server
 - Follow the guide for better-sqlite3: https://github.com/WiseLibs/better-sqlite3/blob/HEAD/docs/troubleshooting.md
 
 - Windows ONLY
-- Visual Studio Community and Desktop Development with C++ extension
+-  Visual Studio Community and Desktop Development with C++ extension
 
 ## Install
 1. Download all the bots files

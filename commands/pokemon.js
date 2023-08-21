@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { EmbedBuilder, PermissionsBitField } = require('discord.js');
+const { EmbedBuilder, PermissionsBitField, ButtonBuilder, ButtonStyle } = require('discord.js');
 const { commandMetrics } = require('../functions.js')
-const paginationEmbed = require('discordjs-button-pagination');
+const paginationEmbed = require('discordjs-button-pagination-v2');
 const ms = require("ms");
 const Pokedex = require('pokedex-promise-v2');
 const SQLite = require("better-sqlite3");
@@ -90,26 +90,26 @@ module.exports = {
             var gen = 1;
 
             let pkmon = peekamon.toLowerCase();
-            const embed1 = new MessageEmbed()
+            const embed1 = new EmbedBuilder()
 
-            const embed2 = new MessageEmbed()
+            const embed2 = new EmbedBuilder()
             embed2.setTitle('Stats')
             
-            const embed3 = new MessageEmbed()
+            const embed3 = new EmbedBuilder()
             embed3.setTitle('Tags')
 
-            const embed4 = new MessageEmbed()
+            const embed4 = new EmbedBuilder()
             embed4.setTitle('Advanced')
 
-            const button1 = new MessageButton()
+            const button1 = new ButtonBuilder()
                 .setCustomId('previousbtn')
                 .setLabel('Previous')
-                .setStyle('DANGER');
+                .setStyle(ButtonStyle.Danger);
 
-            const button2 = new MessageButton()
+            const button2 = new ButtonBuilder()
                 .setCustomId('nextbtn')
                 .setLabel('Next')
-                .setStyle('SUCCESS');
+                .setStyle(ButtonStyle.Success);
 
                 P.getPokemonSpeciesByName(pkmon)
                 .then(function(response) {
@@ -205,7 +205,7 @@ module.exports = {
                     if(type == types3[i].name.toLowerCase()){
                         const link = type
 
-                        const embed1 = new MessageEmbed()
+                        const embed1 = new EmbedBuilder()
                             .setTitle(`Typedex V3 | Information | `+types3[i].name)
                             .setThumbnail("https://dbbackup.lockyzdev.net/botcommands/typedex/"+link+".png")
                             .addFields([
@@ -215,7 +215,7 @@ module.exports = {
                                 { name: "Table of Contents", value: "Page Two: Current Typemap\nPage Three: Gen One Typemap\nPage Four: Gen Two-Five Typemap\nPage Five: Average Stats" }
                             ])
 
-                        const embed2 = new MessageEmbed()
+                        const embed2 = new EmbedBuilder()
                             .setTitle(`Typedex V3 | Current Typemap | `+types3[i].name)
                             .setThumbnail("https://dbbackup.lockyzdev.net/botcommands/typedex/"+link+".png")
                             if(types3[i].attackTypemap.noEffect === "None")
@@ -251,7 +251,7 @@ module.exports = {
                                 embed2.addFields({ name: "**Super Effective From**", value: types3[i].defenceTypemap.superEffective, inline: true })
                             }
 
-                        const embed3 = new MessageEmbed()
+                        const embed3 = new EmbedBuilder()
                             .setTitle(`Typedex V3 | Gen 1 Typemap | `+types3[i].name)
                             .setThumbnail("https://dbbackup.lockyzdev.net/botcommands/typedex/"+link+".png")
                             if(types3[i].genOneAttackTypemap.noEffect === "None")
@@ -287,7 +287,7 @@ module.exports = {
                                 embed3.addField(`**Super Effective From**`, types3[i].genOneDefenseTypemap.superEffective, true)
                             }
 
-                        const embed4 = new MessageEmbed()
+                        const embed4 = new EmbedBuilder()
                             .setTitle(`Typedex V3 | Gen 2-5 Typemap | `+types3[i].name)
                             .setThumbnail("https://dbbackup.lockyzdev.net/botcommands/typedex/"+link+".png")
                             if(types3[i].genTwoFiveAttackTypemap.noEffect === "None")
@@ -322,7 +322,7 @@ module.exports = {
                             } else {
                                 embed4.addFields({ name: `**Super Effective From**`, value: types3[i].genTwoFiveDefenseTypemap.superEffective, inline: true })
                             }
-                        const embed5 = new MessageEmbed()
+                        const embed5 = new EmbedBuilder()
                             .setTitle(`Typedex V3 | Average Stats | `+types3[i].name)
                             .setThumbnail("https://dbbackup.lockyzdev.net/botcommands/typedex/"+link+".png")
                             .addFields([
@@ -334,15 +334,15 @@ module.exports = {
                                 { name: "Speed", value: types3[i].statAverages.speed, inline: true },
                             ])
 
-                        const button1 = new MessageButton()
+                        const button1 = new ButtonBuilder()
                             .setCustomId('previousbtn')
                             .setLabel('Previous')
-                            .setStyle('DANGER');
+                            .setStyle(ButtonStyle.Danger);
     
-                        const button2 = new MessageButton()
+                        const button2 = new ButtonBuilder()
                             .setCustomId('nextbtn')
                             .setLabel('Next')
-                            .setStyle('SUCCESS');
+                            .setStyle(ButtonStyle.Success);
 
                         pages = [
                             embed1,

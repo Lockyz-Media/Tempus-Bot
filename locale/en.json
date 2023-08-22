@@ -93,8 +93,8 @@
         "info": "This command allows one to find the \"Impostor\" among us.\n*Please Note that it's literally just a mathmatical calculation that randomly picks \"Not\"*"
     },
     "bot": {
-        "name": "Bit",
-        "description": "**Bit** is a multipurpose Discord bot."
+        "name": "Tempus Bot",
+        "description": "**Tempus Bot** is a multipurpose Discord bot created for the Pixelmon Tempus Discord Server."
     },
     "kickCommand": {
         "unkickable": "Either my role is too low to Kick this user or they have some sort of magical power.",

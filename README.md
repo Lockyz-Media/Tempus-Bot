@@ -15,6 +15,7 @@ English is the bots "default" and "fallback" language, if a specific language ke
 - English-US (en-US.json)
 - Dutch (nl.json)
 - Spanish (es.json)
+- Ukrainian (uk.json)
 
 ## What language code system do you use?
 We use a modified version of ISO 639-1 language code system where instead of just having the language code, we also occasionally include a region code (based upon ISO 3166-1) for specific dialects. For example en-UWU for our custom English OWO dialect or en-US for US English.

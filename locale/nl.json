@@ -1,7 +1,9 @@
 {
     "languageInfo": {
-      "name": "Dutch",
-      "dialect": "Dutch"
+        "nameEnglish": "Dutch",
+        "dialectEnglish": "Dutch",
+        "nameTranslated": "Dutch",
+        "dialectTranslated": "Dutch"
     },
     "diceEmbed": {
         "name": "Dice Roll",

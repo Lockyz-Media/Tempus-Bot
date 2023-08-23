@@ -1,7 +1,7 @@
 {
     "languageInfo": {
-        "name": "English",
-        "dialect": "Global",
+        "nameEnglish": "English",
+        "dialectEnglish": "Global",
         "nameTranslated": "English",
         "dialectTranslated": "Global"
     },

@@ -2,6 +2,8 @@
 ## DO NOT TRANSLATE STRINGS WITH ENGLISH IN THE TITLE. BE SURE TO KEEP THOSE STRINGS IN ENGLISH.
 For example under the language value you will find nameEnglish and dialectEnglish. Both of these are in English to help the bot work better. Do not change these to any language other then English.
 
+Likewise do not translate Langauage Codes.
+
 English is the bots "default" and "fallback" language, if a specific language key cannot be found in a specific language it will always fall back to the English (global) language.
 ## What languages are currently finished?
 - English

@@ -1,11 +1,11 @@
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, Events } = require('discord.js');
 const { embedColor, ownerID } = require('../config');
 const SQLite = require("better-sqlite3");
 const messageUpdate = require('../logging/messageUpdate');
 const sql = new SQLite('./bot.sqlite');
 
 module.exports = {
-	name: 'interactionCreate',
+	name: Events.InteractionCreate,
 	execute(interaction) {
         const client = interaction.client
         const tempusID = '516551738249969675'

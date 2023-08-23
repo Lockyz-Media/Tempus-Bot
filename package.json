@@ -3,7 +3,8 @@
   "version": "4.0.0",
   "main": "tempus.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "echo \"Deploying Commands\" && node deploy-commands.js"
   },
   "repository": {
     "type": "git",

@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { EmbedBuilder, PermissionsBitField } = require('discord.js')
+const { EmbedBuilder, PermissionsBitField, SlashCommandBuilder } = require('discord.js')
 const { commandMetrics } = require('../functions.js')
 const SQLite = require("better-sqlite3");
 const sql = new SQLite('./bot.sqlite');
@@ -8,119 +7,236 @@ const { givexp, takexp, resetxp } = require("../functions.js")
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('manage')
+        /*.setNameLocalizations({
+			pl: 'pies',
+			de: 'hund',
+		})*/
 		.setDescription('Bot Management command.')
+        /*.setDescriptionLocalizations({
+			pl: 'Rasa psa',
+			de: 'Hunderasse',
+		})*/
+        .setDMPermission(false)
         .addSubcommand(subcommand =>
-            subcommand
-                .setName('points')
-                .setDescription('Manage points on a guild level.')
-                .addStringOption((option) => 
-			        option
-				        .setName('function')
-				        .setDescription('Which function would you like to run?')
-                        .addChoices(
-                            { name: 'Give XP', value: 'give' },
-                            { name: 'Take XP', value: 'take' },
-                            { name: 'Reset XP', value: 'reset' },
-                        )
-				        .setRequired(true)
-		        )
-                .addUserOption((option) => 
-			        option
-				        .setName('user')
-				        .setDescription('The user you wanna kick.')
-				        .setRequired(true)
-		        )
-                .addIntegerOption((option) =>
-                    option
-                        .setName('amount')
-                        .setDescription('The amount of points to give/take')
-                        .setRequired(false)
+            subcommand.setName('points')
+            /*.setNameLocalizations({
+			    pl: 'pies',
+    			de: 'hund',
+		    })*/
+            .setDescription('Manage points on a guild level.')
+            /*.setDescriptionLocalizations({
+			    pl: 'Rasa psa',
+			    de: 'Hunderasse',
+		    })*/
+            .addStringOption((option) => 
+			    option.setName('function')
+                /*.setNameLocalizations({
+			        pl: 'pies',
+			        de: 'hund',
+		        })*/
+				.setDescription('Which function would you like to run?')
+                /*.setDescriptionLocalizations({
+			        pl: 'Rasa psa',
+			        de: 'Hunderasse',
+		        })*/
+                .addChoices(
+                    { name: 'Give XP', value: 'give' },
+                    { name: 'Take XP', value: 'take' },
+                    { name: 'Reset XP', value: 'reset' },
                 )
+				.setRequired(true)
+		    )
+
+            .addUserOption((option) => 
+			    option.setName('user')
+                /*.setNameLocalizations({
+			        pl: 'pies',
+			        de: 'hund',
+		        })*/
+				.setDescription('The user you wanna kick.')
+                /*.setDescriptionLocalizations({
+			        pl: 'Rasa psa',
+			        de: 'Hunderasse',
+		        })*/
+				.setRequired(true)
+		    )
+
+            .addIntegerOption((option) =>
+                option.setName('amount')
+                /*.setNameLocalizations({
+			        pl: 'pies',
+			        de: 'hund',
+		        })*/
+                .setDescription('The amount of points to give/take')
+                /*.setDescriptionLocalizations({
+			        pl: 'Rasa psa',
+			        de: 'Hunderasse',
+		        })*/
+                .setRequired(false)
+            )
         )
+
         .addSubcommand(subcommand =>
-            subcommand
-                .setName('exclude')
-                .setDescription('Exclude a user from any automated features.')
-                .addUserOption((option) =>
-                    option
-                        .setName('user')
-                        .setDescription('The user you want to exclude')
-                        .setRequired(true)
+            subcommand.setName('exclude')
+            /*.setNameLocalizations({
+			    pl: 'pies',
+			    de: 'hund',
+		    })*/
+            .setDescription('Exclude a user from any automated features.')
+            /*.setDescriptionLocalizations({
+			        pl: 'Rasa psa',
+			        de: 'Hunderasse',
+		        })*/
+            .addUserOption((option) =>
+                option.setName('user')
+                /*.setNameLocalizations({
+			        pl: 'pies',
+			        de: 'hund',
+		        })*/
+                .setDescription('The user you want to exclude')
+                /*.setDescriptionLocalizations({
+			        pl: 'Rasa psa',
+			        de: 'Hunderasse',
+		        })*/
+                .setRequired(true)
+            )
+
+            .addStringOption((option) =>
+                option.setName('autonitroscam')
+                /*.setNameLocalizations({
+			        pl: 'pies',
+			        de: 'hund',
+		        })*/
+                .setDescription('Exclude the user from the nitro scam system?')
+                /*.setDescriptionLocalizations({
+			        pl: 'Rasa psa',
+			        de: 'Hunderasse',
+		        })*/
+                .addChoices(
+                    { name: 'Yes', value: 'true' },
+                    { name: 'No', value: 'false' },
                 )
-                .addStringOption((option) =>
-                    option
-                        .setName('autonitroscam')
-                        .setDescription('Exclude the user from the nitro scam system?')
-                        .addChoices(
-                            { name: 'Yes', value: 'true' },
-                            { name: 'No', value: 'false' },
-                        )
-                        .setRequired(true)
+                .setRequired(true)
+            )
+
+            .addStringOption((option) =>
+                option.setName('pointssystem')
+                /*.setNameLocalizations({
+			        pl: 'pies',
+			        de: 'hund',
+		        })*/
+                .setDescription('Exclude the user from the points system?')
+                /*.setDescriptionLocalizations({
+			        pl: 'Rasa psa',
+			        de: 'Hunderasse',
+		        })*/
+                .addChoices(
+                    { name: 'Yes', value: 'true' },
+                    { name: 'No', value: 'false' },
                 )
-                .addStringOption((option) =>
-                    option
-                        .setName('pointssystem')
-                        .setDescription('Exclude the user from the points system?')
-                        .addChoices(
-                            { name: 'Yes', value: 'true' },
-                            { name: 'No', value: 'false' },
-                        )
-                        .setRequired(true)
+                .setRequired(true)
+            )
+
+            .addStringOption((option) =>
+                option.setName('autologs')
+                /*.setNameLocalizations({
+			        pl: 'pies',
+			        de: 'hund',
+		        })*/
+                .setDescription('Exclude the user from the logging system?')
+                /*.setDescriptionLocalizations({
+			        pl: 'Rasa psa',
+			        de: 'Hunderasse',
+		        })*/
+                .addChoices(
+                    { name: 'Yes', value: 'true' },
+                    { name: 'No', value: 'false' },
                 )
-                .addStringOption((option) =>
-                    option
-                        .setName('autologs')
-                        .setDescription('Exclude the user from the logging system?')
-                        .addChoices(
-                            { name: 'Yes', value: 'true' },
-                            { name: 'No', value: 'false' },
-                        )
-                        .setRequired(true)
-                )
+                .setRequired(true)
+            )
         )
+
         .addSubcommand((subcommand) =>
-            subcommand
-                .setName('botstatus')
-                .setDescription('Change the bots status.')
-                .addStringOption((option) =>
-                    option
-                        .setName('enable')
-                        .setDescription('Whether to enable the status or not')
-                        .setRequired(true)
-                        .addChoices(
-                            { name: 'True', value: 'true' },
-                            { name: 'False', value: 'false' },
-                        )
+            subcommand.setName('botstatus')
+            /*.setNameLocalizations({
+			    pl: 'pies',
+			    de: 'hund',
+		    })*/
+            .setDescription('Change the bots status.')
+            /*.setDescriptionLocalizations({
+			    pl: 'Rasa psa',
+			    de: 'Hunderasse',
+		    })*/
+            .addStringOption((option) =>
+                option.setName('enable')
+                /*.setNameLocalizations({
+			        pl: 'pies',
+			        de: 'hund',
+		        })*/
+                .setDescription('Whether to enable the status or not')
+                /*.setDescriptionLocalizations({
+			        pl: 'Rasa psa',
+			        de: 'Hunderasse',
+		        })*/
+                .setRequired(true)
+                .addChoices(
+                    { name: 'True', value: 'true' },
+                    { name: 'False', value: 'false' },
                 )
-                .addStringOption((option) =>
-                    option
-                        .setName('statustype')
-                        .setDescription('The type of status you wanna use')
-                        .setRequired(true)
-                        .addChoices(
-                            { name: 'Online', value: 'online' },
-                            { name: 'Offline', value: 'invisible' },
-                            { name: 'DND', value: 'dnd' },
-                            { name: 'Idle', value: 'idle' },
-                        )
+            )
+
+            .addStringOption((option) =>
+                option.setName('statustype')
+                /*.setNameLocalizations({
+			        pl: 'pies',
+			        de: 'hund',
+		        })*/
+                .setDescription('The type of status you wanna use')
+                /*.setDescriptionLocalizations({
+			        pl: 'Rasa psa',
+			        de: 'Hunderasse',
+		        })*/
+                .setRequired(true)
+                .addChoices(
+                    { name: 'Online', value: 'online' },
+                    { name: 'Offline', value: 'invisible' },
+                    { name: 'DND', value: 'dnd' },
+                    { name: 'Idle', value: 'idle' },
                 )
-                .addStringOption((option) =>
-                    option
-                        .setName('activitytype')
-                        .setDescription('The type of activity you wanna use')
-                        .setRequired(true)
-                        .addChoices(
-                            { name: 'Playing', value: 'PLAYING' },
-                            { name: 'Listening', value: 'LISTENING' },
-                            { name: 'Watching', value: 'WATCHING' },
-                        )
+            )
+
+            .addStringOption((option) =>
+                option.setName('activitytype')
+                /*.setNameLocalizations({
+			        pl: 'pies',
+			        de: 'hund',
+		        })*/
+                .setDescription('The type of activity you wanna use')
+                /*.setDescriptionLocalizations({
+			        pl: 'Rasa psa',
+			        de: 'Hunderasse',
+		        })*/
+                .setRequired(true)
+                .addChoices(
+                    { name: 'Playing', value: 'PLAYING' },
+                    { name: 'Listening', value: 'LISTENING' },
+                    { name: 'Watching', value: 'WATCHING' },
                 )
-                .addStringOption((option) =>
-                    option
-                        .setName('activitytext')
-                        .setDescription('The text the activity should have')
-                        .setRequired(true)
-                )
+            )
+
+            .addStringOption((option) =>
+                option.setName('activitytext')
+                /*.setNameLocalizations({
+			        pl: 'pies',
+			        de: 'hund',
+		        })*/
+                .setDescription('The text the activity should have')
+                /*.setDescriptionLocalizations({
+			        pl: 'Rasa psa',
+			        de: 'Hunderasse',
+		        })*/
+                .setRequired(true)
+            )
         ),
 	async execute(interaction) {
         commandMetrics(interaction.client, "tempus-manage", interaction.guild.id, interaction.user.id)

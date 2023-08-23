@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { MessageEmbed, ActionRowBuilder, ButtonBuilder, Message, ButtonStyle } = require('discord.js')
+const { MessageEmbed, ActionRowBuilder, ButtonBuilder, Message, ButtonStyle, SlashCommandBuilder } = require('discord.js')
 const { commandMetrics } = require('../functions.js')
 const { embedColor, ownerID } = require('../config');
 const owospeak = require("owospeak");
@@ -9,12 +8,28 @@ const sql = new SQLite('./bot.sqlite');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('owoify')
+        /*.setNameLocalizations({
+			pl: 'pies',
+			de: 'hund',
+		})*/
 		.setDescription('UwU wats dis? You want t-to owoify a message? Oh Senpai-san-.- p-pwease u-use me.')
+        /*.setDescriptionLocalizations({
+			pl: 'Rasa psa',
+			de: 'Hunderasse',
+		})*/
+        .setDMPermission(false)
         .addStringOption((option) =>
-            option
-                .setName('message')
-                .setDescription('What message wouwd you w-wike to o-owoify senpai-san?')
-                .setRequired(true)
+            option.setName('message')
+            /*.setNameLocalizations({
+			    pl: 'pies',
+    			de: 'hund',
+	        })*/
+            .setDescription('What message wouwd you w-wike to o-owoify senpai-san?')
+            /*.setDescriptionLocalizations({
+			    pl: 'Rasa psa',
+			    de: 'Hunderasse',
+		    })*/
+            .setRequired(true)
         ),
 	async execute(interaction) {
         commandMetrics(interaction.client, "owoify", interaction.guild.id, interaction.user.id)

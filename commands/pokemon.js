@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { EmbedBuilder, PermissionsBitField } = require('discord.js');
+const { EmbedBuilder, PermissionsBitField, SlashCommandBuilder } = require('discord.js');
 const { commandMetrics } = require('../functions.js')
 const paginationEmbed = require('discordjs-button-pagination');
 const ms = require("ms");
@@ -15,59 +14,111 @@ const types3 = require('../assets/js/types.js');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('pokemon')
+        /*.setNameLocalizations({
+			pl: 'pies',
+			de: 'hund',
+		})*/
 		.setDescription('Get information from the pokemon games')
+        /*.setDescriptionLocalizations({
+			pl: 'Rasa psa',
+			de: 'Hunderasse',
+		})*/
+        .setDMPermission(false)
         .addSubcommand(subcommand =>
-            subcommand
-                .setName('pokedex')
-                .setDescription('Get information on a specific pokemon')
-                .addStringOption((option) => 
-			        option
-				        .setName('pokemon')
-				        .setDescription('The pokemon you want information on.')
-				        .setRequired(true)
-		        )
+            subcommand.setName('pokedex')
+            /*.setNameLocalizations({
+			    pl: 'pies',
+			    de: 'hund',
+		    })*/
+            .setDescription('Get information on a specific pokemon')
+            /*.setDescriptionLocalizations({
+			    pl: 'Rasa psa',
+			    de: 'Hunderasse',
+		    })*/
+            .addStringOption((option) => 
+			    option.setName('pokemon')
+                /*.setNameLocalizations({
+			        pl: 'pies',
+			        de: 'hund',
+		        })*/
+				.setDescription('The pokemon you want information on.')
+                /*.setDescriptionLocalizations({
+			        pl: 'Rasa psa',
+			        de: 'Hunderasse',
+	            })*/
+				.setRequired(true)
+		    )
+        )
+
+        .addSubcommand(subcommand =>
+            subcommand.setName('typedex')
+            /*.setNameLocalizations({
+			    pl: 'pies',
+			    de: 'hund',
+		    })*/
+            .setDescription('Get type information')
+            /*.setDescriptionLocalizations({
+			    pl: 'Rasa psa',
+			    de: 'Hunderasse',
+	        })*/
+            .addStringOption((option) => 
+			    option.setName('type')
+                /*.setNameLocalizations({
+			        pl: 'pies',
+			        de: 'hund',
+		        })*/
+				.setDescription('The type you wanted information for')
+                /*.setDescriptionLocalizations({
+			        pl: 'Rasa psa',
+			        de: 'Hunderasse',
+	            })*/
+				.setRequired(true)
+                .addChoices(
+                    { name: 'Normal', value: 'normal' },
+                    { name: 'Fire', value: 'fire' },
+                    { name: 'Water', value: 'water' },
+                    { name: 'Grass', value: 'grass' },
+                    { name: 'Electric', value: 'electric' },
+                    { name: 'Ice', value: 'ice' },
+                    { name: 'Fighting', value: 'fighting' },
+                    { name: 'Poison', value: 'poison' },
+                    { name: 'Ground', value: 'ground' },
+                    { name: 'Flying', value: 'flying' },
+                    { name: 'Psychic', value: 'psychic' },
+                    { name: 'Bug', value: 'bug' },
+                    { name: 'Rock', value: 'rock' },
+                    { name: 'Ghost', value: 'ghost' },
+                    { name: 'Dark', value: 'dark' },
+                    { name: 'Dragon', value: 'dragon' },
+                    { name: 'Steel', value: 'steel' },
+                    { name: 'Fairy', value: 'fairy' },
+                )
+		    )
         )
         .addSubcommand(subcommand =>
-            subcommand
-                .setName('typedex')
-                .setDescription('Get type information')
-                .addStringOption((option) => 
-			        option
-				        .setName('type')
-				        .setDescription('The type you wanted information for')
-				        .setRequired(true)
-                        .addChoices(
-                            { name: 'Normal', value: 'normal' },
-                            { name: 'Fire', value: 'fire' },
-                            { name: 'Water', value: 'water' },
-                            { name: 'Grass', value: 'grass' },
-                            { name: 'Electric', value: 'electric' },
-                            { name: 'Ice', value: 'ice' },
-                            { name: 'Fighting', value: 'fighting' },
-                            { name: 'Poison', value: 'poison' },
-                            { name: 'Ground', value: 'ground' },
-                            { name: 'Flying', value: 'flying' },
-                            { name: 'Psychic', value: 'psychic' },
-                            { name: 'Bug', value: 'bug' },
-                            { name: 'Rock', value: 'rock' },
-                            { name: 'Ghost', value: 'ghost' },
-                            { name: 'Dark', value: 'dark' },
-                            { name: 'Dragon', value: 'dragon' },
-                            { name: 'Steel', value: 'steel' },
-                            { name: 'Fairy', value: 'fairy' },
-                        )
-		        )
-        )
-        .addSubcommand(subcommand =>
-            subcommand
-                .setName('itemdex')
-                .setDescription('Get item information')
-                .addStringOption((option) => 
-			        option
-				        .setName('item')
-				        .setDescription('The item you wanted information for')
-				        .setRequired(true)
-		        )
+            subcommand.setName('itemdex')
+            /*.setNameLocalizations({
+			    pl: 'pies',
+			    de: 'hund',
+		    })*/
+            .setDescription('Get item information')
+            /*.setDescriptionLocalizations({
+			    pl: 'Rasa psa',
+			    de: 'Hunderasse',
+	        })*/
+            .addStringOption((option) => 
+			    option.setName('item')
+                /*.setNameLocalizations({
+			        pl: 'pies',
+			        de: 'hund',
+		        })*/
+				.setDescription('The item you wanted information for')
+                /*.setDescriptionLocalizations({
+			        pl: 'Rasa psa',
+			        de: 'Hunderasse',
+	            })*/
+				.setRequired(true)
+		    )
         ),
 	async execute(interaction) {
         commandMetrics(interaction.client, "pokemon", interaction.guild.id, interaction.user.id)

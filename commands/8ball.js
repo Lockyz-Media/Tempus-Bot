@@ -7,7 +7,6 @@ const sql = new SQLite('./bot.sqlite');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('8ball')
-		.setDMPermission(false)
 		/*.setNameLocalizations({
 			pl: 'pies',
 			de: 'hund',
@@ -17,6 +16,7 @@ module.exports = {
 			pl: 'Rasa psa',
 			de: 'Hunderasse',
 		})*/
+        .setDMPermission(false)
 		.addStringOption((option) => 
 			option.setName('question')
 			/*.setNameLocalizations({
@@ -29,11 +29,12 @@ module.exports = {
 				de: 'Hunderasse',
 			})*/
 			.setRequired(true)
-			.setMaxLength(200))
-		)
-        	.addStringOption((option) => 
-			option.setName('drink')
-			/*.setNameLocalizations({
+			.setMaxLength(200)
+        )
+
+        .addBooleanOption(option =>
+            option.setName('drink')
+            /*.setNameLocalizations({
 				pl: 'pies',
 				de: 'hund',
 			})*/
@@ -43,10 +44,8 @@ module.exports = {
 				de: 'Hunderasse',
 			})*/
 			.setRequired(true)
-                	.addChoices(
-                    		{ name: 'Yes', value: 'true' },
-                    		{ name: 'No', value: 'false' },
-                )),
+        )
+,
 	async execute(interaction) {
         const client = interaction.client
         const question = interaction.options.getString('question');
@@ -88,7 +87,7 @@ module.exports = {
 
         var answer = roll[Math.floor(Math.random()* roll.length)];
 
-        if(drink === "true") {
+        if(drink === true) {
             var drinkChoices = [
                 ["01", "died"],
                 ["02", "can now see into the future"],

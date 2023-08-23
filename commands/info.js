@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { EmbedBuilder, PermissionsBitField } = require('discord.js')
+const { EmbedBuilder, PermissionsBitField, SlashCommandBuilder } = require('discord.js')
 const { commandMetrics } = require('../functions.js')
 const locale = require('../locale/en.json')
 const SQLite = require("better-sqlite3");
@@ -8,7 +7,16 @@ const sql = new SQLite('./bot.sqlite');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('info')
-		.setDescription('Get advanced information about the bot.'),
+        /*.setNameLocalizations({
+			pl: 'pies',
+			de: 'hund',
+		})*/
+		.setDescription('Get advanced information about the bot.')
+        /*.setDescriptionLocalizations({
+			pl: 'Rasa psa',
+			de: 'Hunderasse',
+		})*/
+        .setDMPermission(false),
 	async execute(interaction) {
         commandMetrics(interaction.client, "info", interaction.guild.id, interaction.user.id)
         const client = interaction.client

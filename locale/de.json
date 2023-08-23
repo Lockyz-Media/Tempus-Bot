@@ -2,6 +2,8 @@
     "languageInfo": {
         "nameEnglish": "German",
         "dialectEnglish": "German",
+        "languageCode": "de",
+        "discordLanguageCode": "de",
         "nameTranslated": "German",
         "dialectTranslated": "German"
     },

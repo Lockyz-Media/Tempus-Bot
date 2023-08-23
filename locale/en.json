@@ -1,7 +1,9 @@
 {
     "languageInfo": {
-      "name": "English",
-      "dialect": "Global"
+        "name": "English",
+        "dialect": "Global",
+        "nameTranslated": "English",
+        "dialectTranslated": "Global"
     },
     "diceEmbed": {
         "name": "Dice Roll",

@@ -1,4 +1,8 @@
 {
+    "languageInfo": {
+      "name": "French",
+      "dialect": "French"
+    },
     "diceEmbed": {
         "name": "Dice Roll",
         "word": "Dice",

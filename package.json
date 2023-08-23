@@ -1,4 +1,20 @@
 {
+  "name": "tempus-bot",
+  "version": "4.0.0",
+  "main": "tempus.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lockyz-Dev/Tempus-Bot.git"
+  },
+  "author": "Lockyz Dev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lockyz-Dev/Tempus-Bot/issues"
+  },
+  "homepage": "https://github.com/Lockyz-Dev/Tempus-Bot#readme",
   "dependencies": {
     "@napi-rs/canvas": "^0.1.41",
     "better-sqlite3": "^7.5.1",

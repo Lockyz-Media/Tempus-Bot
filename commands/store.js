@@ -64,57 +64,52 @@ module.exports = {
                 switch (itemID) {
                     case '0000':
                         const embed0 = new EmbedBuilder()
-                            .setDescription('This test has been paused')
-                            /*.setTitle('Item List')
+                            .setTitle('Item List')
                             .addField('Item 0001: Dead Dog png', '~~2000 Tempus Coin~~\n**Out of Stock**', true)
                             .addField('Item 0002: Dead Dog png', '~~2000 Tempus Coin~~\n**Out of Stock**', true)
                             .addField('Item 0003: Dead Dog png', '~~2000 Tempus Coin~~\n**Out of Stock**', true)
-                            .setFooter({ text: 'This command is a concept and subject to change' })*/
+                            .setFooter({ text: 'This command is a concept and subject to change' })
                         interaction.reply({ embeds: [embed0], ephemeral: true })
                     break;
                     case '0001':
                         const embed1 = new EmbedBuilder()
-                            .setDescription('This test has been paused')
-                            /*.setTitle('Item 0001: Dead Dog png')
+                            .setTitle('Item 0001: Dead Dog png')
                             .setDescription('It\'s a dead dog in a box but as a png\nDon\'t question it, we don\'t know either.\n\nThis item has no use at this current time.')
                             .addField('Price', '~~2000 Tempus Coin~~\n**Out of Stock**', true)
                             .addField('Stock', '**Out of Stock**', true)
                             .addField('Purchase', '~~`/store purchase 0001 {amount}`~~\n**Out of Stock**', true)
-                            .setFooter({ text: 'This command is a concept and subject to change' })*/
+                            .setFooter({ text: 'This command is a concept and subject to change' })
                         interaction.reply({ embeds: [embed1], ephemeral: true })
                     break;
                     case '0002':
                         const embed2 = new EmbedBuilder()
-                            .setDescription('This test has been paused')
-                            /*.setTitle('Item 0002: Dead Dog png')
+                            .setTitle('Item 0002: Dead Dog png')
                             .setDescription('It\'s a dead dog in a box but as a png\nDon\'t question it, we don\'t know either.\n\nThis item has no use at this current time.')
                             .addField('Price', '~~2000 Tempus Coin~~\n**Out of Stock**', true)
                             .addField('Stock', '**Out of Stock**', true)
                             .addField('Purchase', '~~`/store purchase 0002 {amount}`~~\n**Out of Stock**', true)
-                            .setFooter({ text: 'This command is a concept and subject to change' })*/
+                            .setFooter({ text: 'This command is a concept and subject to change' })
                         interaction.reply({ embeds: [embed2], ephemeral: true })
                     break;
                     case '0003':
                         const embed3 = new EmbedBuilder()
-                            .setDescription('This test has been paused')
-                            /*.setTitle('Item 0003: Dead Dog png')
+                            .setTitle('Item 0003: Dead Dog png')
                             .setDescription('It\'s a dead dog in a box but as a png\nDon\'t question it, we don\'t know either.\n\nThis item has no use at this current time.')
                             .addField('Price', '~~2000 Tempus Coin~~\n**Out of Stock**', true)
                             .addField('Stock', '**Out of Stock**', true)
                             .addField('Purchase', '~~`/store purchase 0003 {amount}`~~\n**Out of Stock**', true)
-                            .setFooter({ text: 'This command is a concept and subject to change' })*/
+                            .setFooter({ text: 'This command is a concept and subject to change' })
                         interaction.reply({ embeds: [embed3], ephemeral: true })
                     break;
                     default:
-                        interaction.reply({ content: 'This test has been paused'})
-                        //interaction.reply({ content: 'This command is currently only available as a concept at this current time and is subject to change in the near future.', ephemeral: true })
+                        interaction.reply({ content: 'This command is currently only available as a concept at this current time and is subject to change in the near future.', ephemeral: true })
                 }
             break;
             case 'purchase':
-                interaction.reply({ content: 'This test has been paused'})
+                interaction.reply({ content: 'This command is currently only available as a concept at this current time and is subject to change in the near future.', ephemeral: true })
             break;
             default:
-                interaction.reply({ content: 'This test has been paused'})
+                interaction.reply({ content: 'This command is currently only available as a concept at this current time and is subject to change in the near future.', ephemeral: true})
         }
 	}
 };

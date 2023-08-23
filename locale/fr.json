@@ -1,7 +1,9 @@
 {
     "languageInfo": {
-      "name": "French",
-      "dialect": "French"
+        "name": "French",
+        "dialect": "French",
+        "nameTranslated": "French",
+        "dialectTranslated": "French"
     },
     "diceEmbed": {
         "name": "Dice Roll",

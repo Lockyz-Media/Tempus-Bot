@@ -4,16 +4,16 @@ const { token } = require('./config.json');
 
 const client = new Client({
 	intents: [
-        GatewayIntentBits.Guilds,
+		GatewayIntentBits.Guilds,
 		GatewayIntentBits.GuildMembers,
 		GatewayIntentBits.GuildMessageReactions,
-		GatewayIntentBits.GuildBans,
-		GatewayIntentBits.GuildWebhooks,
+		GatewayIntentBits.GuildModeration,
 		GatewayIntentBits.GuildInvites,
 		GatewayIntentBits.GuildPresences,
 		GatewayIntentBits.GuildMessages,
 		GatewayIntentBits.DirectMessages,
-        GatewayIntentBits.MessageContent
+		GatewayIntentBits.MessageContent,
+		GatewayIntentBits.GuildEmojisAndStickers,
     ],
     partials: [
         Partials.Message,
@@ -21,6 +21,11 @@ const client = new Client({
         Partials.Reaction
     ]
 });
+var thisSentence = false;
+
+process.on('unhandledRejection', error => {
+	console.error('Unhandled promise rejection:', error);
+})
 
 const { GiveawaysManager } = require('discord-giveaways');
 // Starts updating currents giveaways
@@ -37,35 +42,50 @@ const manager = new GiveawaysManager(client, {
 client.giveawaysManager = manager;
 
 client.commands = new Collection();
-const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
-for (const file of commandFiles) {
-	const command = require(`./commands/${file}`);
-	// Set a new item in the Collection
-	// With the key as the command name and the value as the exported module
-	client.commands.set(command.data.name, command);
+const commandsPath = path.join(__dirname, 'commands');
+const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+
+for(const file of commandFiles) {
+	const filePath = path.join(commandsPath, file);
+	const command = require(filePath);
+
+	if('data' in command && 'execute' in command) {
+		client.commands.set(command.data.name, command);
+	} else {
+		console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
+	}
 }
+console.log("Loading "+commandFiles.length+" commands")
 
-const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
-const loggingFiles = fs.readdirSync('./logging').filter(file => file.endsWith('.js'));
+const eventsPath = path.join(__dirname, 'events');
+const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
 
-for (const file of eventFiles) {
-	const event = require(`./events/${file}`);
-	if (event.once) {
+for(const file of eventFiles) {
+	const filePath = path.join(eventsPath, file);
+	const event = require(filePath);
+	if(event.once) {
 		client.once(event.name, (...args) => event.execute(...args));
 	} else {
 		client.on(event.name, (...args) => event.execute(...args));
 	}
 }
+console.log("Loading "+eventFiles.length+" events")
 
-for (const file of loggingFiles) {
-	const logging = require(`./logging/${file}`);
-	if (logging.once) {
-		client.once(logging.name, (...args) => logging.execute(...args));
+const loggingPath = path.join(__dirname, 'logging');
+const loggingFiles = fs.readdirSync(loggingPath).filter(file => file.endsWith('.js'));
+
+for(const file of loggingFiles) {
+	const filePath = path.join(loggingPath, file);
+	const logs = require(filePath);
+	if(logs.once) {
+		client.once(logs.name, (...args) => logs.execute(...args));
 	} else {
-		client.on(logging.name, (...args) => logging.execute(...args));
+		client.on(logs.name, (...args) => logs.execute(...args));
 	}
 }
+
+console.log("Loading "+loggingFiles.length+" logging functions")
 
 client.once('ready', () => {
 	console.log('Ready!');

@@ -18,6 +18,13 @@ module.exports = {
 			inviteEnd = Math.floor(currentDate+invite.maxAge)
 		}
 		var inviter
+		var useString
+
+		if(invite.maxUses === 0){
+			useString = " and has infinite uses "
+		} else {
+			useString = " and has "+invite.maxUses+" max uses "
+		}
 		
 		if(invite.inviter.username) {
 		    inviter = invite.inviter.username

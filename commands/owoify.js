@@ -32,11 +32,26 @@ module.exports = {
         const message = interaction.options.getString('message');
 
         interaction.reply({ content: owospeak.convert(locale.owoWait, { stutter: true, tilde: true }) })
+	    var messageObject
+
+        if(!isNaN(message)) {
+            if(interaction.channel.messages.fetch(message)) {
+                messageObject = true
+            } else {
+                messageObject = false
+            }
+        } else {
+            messageObject = false
+        }
 
         setTimeout(function(){
-            interaction.channel.messages.fetch(message)
-            .then(message => interaction.editReply({ content: owospeak.convert(message.cleanContent, { stutter: true, tilde: true })}))
-            .catch(console.error);
+            if(messageObject === true) {
+		        interaction.channel.messages.fetch(message)
+		    	    .then(message => interaction.editReply({ content: owospeak.convert(message.cleanContent, { stutter: true, tilde: true })}))
+            		    .catch(console.error);
+	        } else {
+    		    interaction.editReply({ content: owospeak.convert(message, { stutter: true, tilde: true })})
+	        }
         }, 5000)
 	}
 };

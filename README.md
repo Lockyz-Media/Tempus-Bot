@@ -9,14 +9,14 @@ Tempus bot is a bot created by Lockyz Dev for the Pixelmon Tempus Discord Server
 - discord.js: v14.13.0
 - DismonDB: 4.0.3
 - better-sqlite3: 7.5.1
-- @napi-rs/canvas: 0.1.41
+- @napi-rs/canvas: 0.1.44
 - discord-giveaways: 6.0.1
 - @lockyzdev/discordjs-button-pagination: Not public
 - humanize-duration: 3.27.1
 - moment: 2.91.1
 - moment-duration-format: 2.3.2
 - ms: 2.1.3
-- owospeak: 1.0.3
+- owospeak: 1.0.4
 - pokedex-promise-v2: 3.3.2
 
 ## Prerequisites

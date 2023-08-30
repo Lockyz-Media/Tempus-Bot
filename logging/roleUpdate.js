@@ -1,20 +1,20 @@
 const { EmbedBuilder } = require('discord.js');
-const { embedColours, ownerID } = require('../config');
+const { embedColours, ownerID, tempusIDs } = require('../config');
 
 module.exports = {
 	name: 'roleUpdate',
 	execute(oldRole, newRole) {
 		const client = newRole.client
-		var tempusID = '516551738249969675'
-		var logsID = '635300240819486732'
+		var tempusID = tempusIDs.guild
+		var logsID = tempusIDs.logs
 		var ncolor = newRole.color
 		var ocolor = oldRole.color
 		var nhoist = newRole.hoist
 		var ohoist = oldRole.hoist
 		var nmentionable = newRole.mentionable
 		var omentionable = oldRole.mentionable
-		var npermissions = newRole.PermissionsBitField.FLAGS
-		var opermissions = oldRole.PermissionsBitField.FLAGS
+		//var npermissions = newRole.PermissionsBitField.FLAGS
+		//var opermissions = oldRole.PermissionsBitField.FLAGS
 		var nemoji = newRole.unicodeEmoji
 		var oemoji = oldRole.unicodeEmoji
 		var nname = newRole.name
@@ -24,7 +24,7 @@ module.exports = {
 			return;
 		}
 
-			if(ncolor !== ocolor || nhoist !== ohoist || nmentionable !== omentionable || nname !== oname || npermissions !== opermissions || nemoji !== oemoji) {
+			if(ncolor !== ocolor || nhoist !== ohoist || nmentionable !== omentionable || nname !== oname || nemoji !== oemoji) {
 				const embed = new EmbedBuilder()
 					.setDescription("A role named "+oname+" has been updated")
 					if(nname !== oname) {

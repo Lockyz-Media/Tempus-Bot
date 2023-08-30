@@ -1,12 +1,12 @@
 const { EmbedBuilder } = require('discord.js');
-const { embedColours, ownerID } = require('../config');
+const { embedColours, ownerID, tempusIDs } = require('../config');
 
 module.exports = {
 	name: 'channelUpdate',
 	execute(oldChannel, newChannel) {
 		const client = newChannel.client
-		var tempusID = '516551738249969675'
-		var logsID = "635300240819486732"
+		var tempusID = tempusIDs.guild
+		var logsID = tempusIDs.logs
 		var nname = newChannel.name
 		var oname = oldChannel.name
 		var nparent
@@ -60,15 +60,15 @@ module.exports = {
 
 		var isThread = false;
 
-		if(channel.type === 11 || channel.type === 12 || channel.type === 13)
+		if(newChannel.type === 11 || newChannel.type === 12 || newChannel.type === 13)
 		{
 			isThread = true;
 		}
 
 		var categoryText
 
-		if(channel.parent) {
-			categoryText = " in "+channel.parent.name+' was edited.'
+		if(newChannel.parent) {
+			categoryText = " in "+newChannel.parent.name+' was edited.'
 		} else {
 			categoryText = " was edited."
 		}

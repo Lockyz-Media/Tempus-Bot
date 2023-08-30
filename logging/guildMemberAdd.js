@@ -2,7 +2,7 @@ const { EmbedBuilder, Message, AttachmentBuilder } = require('discord.js');
 const { createCanvas, Image, GlobalFonts } = require('@napi-rs/canvas');
 const { readFile } = require('fs/promises');
 const { request } = require('undici');
-const { embedColours, ownerID } = require('../config');
+const { embedColours, ownerID, tempusIDs } = require('../config');
 
 module.exports = {
 	name: 'guildMemberAdd',
@@ -10,8 +10,8 @@ module.exports = {
 		GlobalFonts.registerFromPath('./assets/font.ttf', 'Pokemon')
 		const client = member.client
 		const user = member.user
-		var tempusID = '516551738249969675'
-		var logsID = '635300240819486732'
+		var tempusID = tempusIDs.guild
+		var logsID = tempusIDs.logs
 		var welcomeID = '640058237043081226'
 
 		const applyText = (canvas, text) => {
@@ -46,7 +46,7 @@ module.exports = {
 				font: "Pokemon",
 				colour: "#e2c522",
 				borderColour: "#3e6ab4",
-				text: "Welcome, "+member.username,
+				text: "Welcome, "+member.displayName,
 			},
 			subtitle: {
 				x: canvas.width / 2,

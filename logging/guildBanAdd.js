@@ -1,12 +1,12 @@
 const { EmbedBuilder } = require('discord.js');
-const { embedColours, ownerID } = require('../config');
+const { embedColours, ownerID, tempusIDs } = require('../config');
 
 module.exports = {
 	name: 'guildBanAdd',
 	execute(ban) {
 		const client = ban.client
-		var tempusID = '516551738249969675'
-		var logsID = "635300240819486732"
+		var tempusID = tempusIDs.guild
+		var logsID = tempusIDs.logs
 
 		if(ban.guild.id !== tempusID) {
 			return;

@@ -1,13 +1,13 @@
 const { EmbedBuilder } = require('discord.js');
-const { embedColours, ownerID } = require('../config');
+const { embedColours, ownerID, tempusIDs } = require('../config');
 
 module.exports = {
 	name: 'messageDelete',
 	execute(message) {
 		const client = message.client
 		const user = message.user
-		var logsID = '635300240819486732'
-		var tempusID = '516551738249969675'
+		var logsID = tempusIDs.logs
+		var tempusID = tempusIDs.guild
 
 		if(message.guild.id != tempusID) {
 			return;

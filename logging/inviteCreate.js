@@ -1,10 +1,10 @@
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, Events } = require('discord.js');
 const { embedColours, ownerID, tempusIDs } = require('../config');
 const SQLite = require("better-sqlite3");
 const sql = new SQLite('./bot.sqlite');
 
 module.exports = {
-	name: 'inviteCreate',
+	name: Events.InviteCreate,
 	execute(invite) {
         const client = invite.client
 

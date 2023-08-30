@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require('discord.js');
-const { embedColours, ownerID } = require('../config');
+const { embedColours, ownerID, tempusIDs } = require('../config');
 const SQLite = require("better-sqlite3");
 const humanizeDuration = require('humanize-duration');
 const sql = new SQLite('./bot.sqlite');
@@ -12,8 +12,8 @@ module.exports = {
         const user = message.author.user
         const member = message.author
         const guild = message.guild
-        var logsID = '635300240819486732'
-        var tempusID = '516551738249969675'
+        var logsID = tempusIDs.logs
+        var tempusID = tempusIDs.guild
 
         if(message.channel.id === '875652753924448306') {
             if(message.author.id === '835394949612175380') {
@@ -56,7 +56,7 @@ module.exports = {
             }
         }
         
-        const row0 = ['http://', 'https://', 'http', 'www.']
+        /*const row0 = ['http://', 'https://', 'http', 'www.']
         const row1 = ['free', 'get', 'click', 'take', 'gift', '@everyone']
         const row2 = ['nitro', 'diiscord', 'niitro', 'nitr', 'disc', 'diskord', 'disckord', 'taplink', 'discords', 'tinyurl', 'bit.ly']
         const row3 = ['airdrop', 'steam', 'referral', 'epic', 'promotion', 'twitch', 'running out', 'first', '@everyone']
@@ -87,7 +87,7 @@ module.exports = {
                     }
                 }
             }
-        }
+        }*/
         
 
         if(message.author.bot) {

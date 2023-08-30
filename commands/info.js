@@ -1,7 +1,8 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { EmbedBuilder, PermissionsBitField } = require('discord.js')
+const { EmbedBuilder, PermissionsBitField, version: discordVersion } = require('discord.js')
 const { commandMetrics } = require('../functions.js')
-const locale = require('../locale/en.json')
+const moment = require('moment');
+require('moment-duration-format');
 const SQLite = require("better-sqlite3");
 const sql = new SQLite('./bot.sqlite');
 
@@ -15,6 +16,11 @@ module.exports = {
         
         var d = new Date();
         var n = d.getFullYear();
+        const botUptime = moment.duration(client.uptime).format(' D [days], H [hrs], m [mins], s [secs]');
+        const memUsage = (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2);
+        const guildSize = client.guilds.cache.size.toString();
+        const userSize = client.users.cache.size.toString();
+
         const embed = new EmbedBuilder()
             .setTitle('Tempus Bot')
             .setDescription('**Tempus Bot** is a multipurpose Discord Bot created for the Pixelmon Tempus Discord Server.')

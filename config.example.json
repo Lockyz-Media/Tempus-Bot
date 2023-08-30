@@ -1,14 +1,24 @@
 {
 	"embedColor": "#86C1FD",
-	"embedColours": [
+	"embedColours": {
 		"positive": "#00FF1C",
 		"negative": "#FF0000",
 		"neutral": "#9013FE",
 		"main": "#86C1FD",
-		"secondary": "#50E3C2",
-	],
+		"secondary": "#50E3C2"
+	},
+	"tempusIDs": {
+		"logs": "LOGGING ID",
+		"guild": "GUILD ID"
+	},
+	"activity": {
+		"type": "custom",
+		"name": "TooMuchPower",
+		"state": "Discord has given me too much power",
+		"status": "online"
+	},
 	"ownerID": "OWNER ID",
 	"clientId": "CLIENT ID",
 	"guildId": "GUILD ID",
-	"token": "TOKEN"
+	"token": "DISCORD TOKEN"
 }

@@ -21,9 +21,9 @@ module.exports = {
 		var useString
 
 		if(invite.maxUses === 0){
-			useString = " and has infinite uses "
+			useString = " and has infinite uses."
 		} else {
-			useString = " and has "+invite.maxUses+" max uses "
+			useString = " and has "+invite.maxUses+" max uses."
 		}
 		
 		if(invite.inviter.username) {
@@ -35,9 +35,9 @@ module.exports = {
 		const embed = new EmbedBuilder()
 			.setColor(embedColours.positive)
 			if(invite.maxAge === 0) {
-				embed.setDescription("An infinite invite was created by "+inviter+", and has "+invite.maxUses+" max uses\nhttps://discord.gg/"+invite.code);
+				embed.setDescription("An infinite invite was created by "+inviter+useString+"\nhttps://discord.gg/"+invite.code);
 			} else {
-				embed.setDescription("An invite was created by "+inviter+", it will end <t:"+inviteEnd+":R> and has "+invite.maxUses+" max uses\nhttps://discord.gg/"+invite.code);
+				embed.setDescription("An invite was created by "+inviter+", it will end <t:"+inviteEnd+":R>"+useString+"\nhttps://discord.gg/"+invite.code);
 			}
 			embed.setTimestamp();
 		client.channels.cache.get(logsID).send({ embeds: [embed] });

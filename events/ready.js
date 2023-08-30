@@ -1,8 +1,8 @@
-const { ActivityType } = require('discord.js');
+const { ActivityType, Events } = require('discord.js');
 const { embedColours, ownerID, tempusIDs, activity } = require('../config');
 
 module.exports = {
-	name: 'ready',
+	name: Events.ClientReady,
 	once: true,
 	execute(client) {
 		var statusActivityType = ActivityType.Playing

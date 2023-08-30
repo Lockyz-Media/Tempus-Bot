@@ -1,8 +1,8 @@
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, Events } = require('discord.js');
 const { embedColor, ownerID, tempusIDs, embedColours } = require('../config');
 
 module.exports = {
-	name: 'roleDelete',
+	name: Events.GuildRoleDelete,
 	execute(role) {
 		const client = role.client
 		var tempusID = tempusIDs.guild

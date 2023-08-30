@@ -1,8 +1,8 @@
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, Events } = require('discord.js');
 const { embedColours, ownerID, tempusIDs } = require('../config');
 
 module.exports = {
-	name: 'messageDelete',
+	name: Events.MessageDelete,
 	execute(message) {
 		const client = message.client
 		const user = message.user

@@ -1,6 +1,4 @@
-//const { SlashCommandBuilder } = require('@discordjs/builders');
-const { ButtonBuilder, ButtonStyle, SlashCommandBuilder } = require('discord.js');
-const { Client, Collection, Intents } = require('discord.js');
+const { ButtonBuilder, ButtonStyle, SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, SelectMenuBuilder, Client, Collection, Intents } = require('discord.js');
 const fs = require('node:fs');
 const path = require('node:path');
 const { EmbedBuilder, ActionRowBuilder, SelectMenuBuilder   } = require('discord.js')
@@ -16,115 +14,104 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('dev')
 		.setDescription('Execute Bot Developer Commands.')
+        .setDMPermission(false)
 		.addSubcommandGroup((group) => 
-		    group
-		        .setName("manage-bot")
-		        .setDescription("Manage Bot Features")
-		        .addSubcommand(subcommand =>
-		            subcommand
-		                .setName('commands')
-		                .setDescription('Manage Commands')
-		                .addStringOption((option) =>
-		                    option
-		                        .setName('function')
-		                        .setDescription('Which function to run?')
-		                        .setRequired(true)
-		                        .addChoices(
-                    	            { name: 'Restart', value: 'restart' },
-                    	            { name: 'Reload Commands', value: 'reload-commands' },
-                    	            { name: 'List Commands', value: 'list-commands' },
-                    	            { name: 'Disable Commands', value: 'disable-commands' },
-                                    { name: 'Bot Management Dashboard', value: 'bot-dashboard' },
-                	            )
-		                    )
-				        .addStringOption((option) =>
-					       option
-						      .setName('command')
-						        .setDescription('The command to manage.')
-						        .setRequired(true)
-				        )
-		            )
-		)
-        .addSubcommandGroup((group) =>
-            group
-                .setName('xp_system')
-                .setDescription('Alter settings for the XP System.')
-                .addSubcommand((subcommand) =>
-                    subcommand
-                        .setName('manage_user_points')
-                        .setDescription('Increase or Decrease the points of a user')
-                        .addUserOption((option) =>
-                            option
-                                .setName('user')
-                                .setDescription('The user in which you wanna reset the points of.')
-                                .setRequired(true)
-                        )
-                )
-                .addSubcommand((subcommand) =>
-                    subcommand
-                        .setName('disable_user_points')
-                        .setDescription('Disable a users ability to gain points')
-                        .addUserOption((option) =>
-                            option
-                                .setName('user')
-                                .setDescription('The user in which you wanna reset the points of.')
-                                .setRequired(true)
-                        )
-                )
-                .addSubcommand((subcommand) =>
-                    subcommand
-                        .setName('reset_user_points')
-                        .setDescription('Reset the points of a specific user')
-                        .addUserOption((option) =>
-                            option
-                                .setName('user')
-                                .setDescription('The user in which you wanna reset the points of.')
-                                .setRequired(true)
-                        )
-                )
-        )
-		.addSubcommandGroup((group) =>
-			group
-				.setName('test')
-				.setDescription('Run a test')
-				.addSubcommand((subcommand) =>
-					subcommand
-						.setName('command-test')
-						.setDescription("Run Command Tests")
-						.addStringOption((option) =>
-							option
-								.setName('commandname')
-								.setDescription("The name of the command to run a test for")
-								.addChoices(
-									{ name: 'WTP', value: 'wtp' },
-									{ name: 'test', value: 'test' }
-								)
-						)
-				)
-		)
-        .addSubcommandGroup((group) =>
-            group
-                .setName('manage')
-                .setDescription('Manage either the bot or the server.')
-                .addSubcommand((subcommand) =>
-                    subcommand
-                        .setName('bot')
-                        .setDescription('Manage the Bot')
-                        .addStringOption((option) =>
-                            option
-                                .setName('option')
-                                .setDescription('Which developer function did you want to run?')
-                                .setRequired(true)
-                                .addChoices(
-                                    { name: 'Restart', value: 'restart'},
-                                    { name: 'Reload Commands', value: 'reload-cmds'},
-                                    { name: 'List Commands', value: 'list-cmds'},
-                                    { name: 'Delete Commands', value: 'delete-cmds'},
-                                    { name: 'Create Role Select', value: 'role-select'},
-                                )
-                        )
+		    group.setName("manage-bot")
+		    .setDescription("Manage Bot Features")
+		    .addSubcommand(subcommand =>
+		        subcommand.setName('commands')
+		        .setDescription('Manage Commands')
+		        .addStringOption((option) =>
+		            option.setName('function')
+		            .setDescription('Which function to run?')
+		            .setRequired(true)
+		            .addChoices(
+                    	{ name: 'Restart', value: 'restart' },
+                    	{ name: 'Reload Commands', value: 'reload-commands' },
+                    	{ name: 'List Commands', value: 'list-commands' },
+                    	{ name: 'Disable Commands', value: 'disable-commands' },
+                        { name: 'Bot Management Dashboard', value: 'bot-dashboard' },
+                	)
+		        )
 
+			    .addStringOption((option) =>
+					option.setName('command')
+					.setDescription('The command to manage.')
+					.setRequired(true)
+				)
+		    )
+		)
+
+        .addSubcommandGroup((group) =>
+            group.setName('xp_system')
+            .setDescription('Alter settings for the XP System.')
+            .addSubcommand((subcommand) =>
+                subcommand.setName('manage_user_points')
+                .setDescription('Increase or Decrease the points of a user')
+                .addUserOption((option) =>
+                    option.setName('user')
+                    .setDescription('The user in which you wanna reset the points of.')
+                    .setRequired(true)
                 )
+            )
+
+            .addSubcommand((subcommand) =>
+                subcommand.setName('disable_user_points')
+                .setDescription('Disable a users ability to gain points')
+                .addUserOption((option) =>
+                    option.setName('user')
+                    .setDescription('The user in which you wanna reset the points of.')
+                    .setRequired(true)
+                )
+            )
+
+            .addSubcommand((subcommand) =>
+                subcommand.setName('reset_user_points')
+                .setDescription('Reset the points of a specific user')
+                .addUserOption((option) =>
+                    option.setName('user')
+                    .setDescription('The user in which you wanna reset the points of.')
+                    .setRequired(true)
+                )
+            )
+        )
+
+		.addSubcommandGroup((group) =>
+			group.setName('test')
+			.setDescription('Run a test')
+			.addSubcommand((subcommand) =>
+				subcommand.setName('command-test')
+				.setDescription("Run Command Tests")
+				.addStringOption((option) =>
+					option.setName('commandname')
+					.setDescription("The name of the command to run a test for")
+					.addChoices(
+						{ name: 'WTP', value: 'wtp' },
+						{ name: 'test', value: 'test' }
+					)
+				)
+			)
+		)
+
+        .addSubcommandGroup((group) =>
+            group.setName('manage')
+            .setDescription('Manage either the bot or the server.')
+            .addSubcommand((subcommand) =>
+                subcommand.setName('bot')
+                .setDescription('Manage the Bot')
+                .addStringOption((option) =>
+                    option.setName('option')
+                    .setDescription('Which developer function did you want to run?')
+                    .setRequired(true)
+                    .addChoices(
+                        { name: 'Restart', value: 'restart'},
+                        { name: 'Reload Commands', value: 'reload-cmds'},
+                        { name: 'List Commands', value: 'list-cmds'},
+                        { name: 'Delete Commands', value: 'delete-cmds'},
+                        { name: 'Create Role Select', value: 'role-select'},
+                    )
+                )
+            )
         ),
 	async execute(interaction) {
         const client = interaction.client

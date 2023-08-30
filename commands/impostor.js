@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 const { commandMetrics } = require('../functions.js')
 const locale = require('../locale/en.json')
 const SQLite = require("better-sqlite3");
@@ -7,22 +7,46 @@ const sql = new SQLite('./bot.sqlite');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('impostor')
+		/*.setNameLocalizations({
+			pl: 'pies',
+			de: 'hund',
+		})*/
 		.setDescription('Find the impostor amogus')
+		/*.setDescriptionLocalizations({
+			pl: 'Rasa psa',
+			de: 'Hunderasse',
+		})*/
+		.setDMPermission(false)
 		.addUserOption((option) => 
-			option
-				.setName('user')
-				.setDescription('The user you think is the impostor.')
-				.setRequired(false)
+			option.setName('user')
+			/*.setNameLocalizations({
+				pl: 'pies',
+				de: 'hund',
+			})*/
+			.setDescription('The user you think is the impostor.')
+			/*.setDescriptionLocalizations({
+				pl: 'Rasa psa',
+				de: 'Hunderasse',
+			})*/
+			.setRequired(false)
 		)
+		
 		.addStringOption((option) => 
-			option
-				.setName('help')
-				.setDescription('Find out what this command is')
-				.setRequired(false)
-				.addChoices(
-					{ name: 'Yes', value: 'true' },
-					{ name: 'No', value: 'false' },
-				)
+			option.setName('help')
+			/*.setNameLocalizations({
+				pl: 'pies',
+				de: 'hund',
+			})*/
+			.setDescription('Find out what this command is')
+			/*.setDescriptionLocalizations({
+				pl: 'Rasa psa',
+				de: 'Hunderasse',
+			})*/
+			.setRequired(false)
+			.addChoices(
+				{ name: 'Yes', value: 'true' },
+				{ name: 'No', value: 'false' },
+			)
 		),
 	async execute(interaction) {
 		commandMetrics(interaction.client, "impostor", interaction.guild.id, interaction.user.id)

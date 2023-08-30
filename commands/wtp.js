@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
-const { EmbedBuilder, Permissions } = require('discord.js');
+const { EmbedBuilder, Permissions, SlashCommandBuilder } = require('discord.js');
 const { givexp, takexp, ranNum, commandMetrics } = require("../functions.js")
 const ms = require("ms");
 //const SQLite = require("better-sqlite3");
@@ -10,76 +9,108 @@ var P = new Pokedex();
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('wtp')
+        /*.setNameLocalizations({
+			pl: 'pies',
+			de: 'hund',
+		})*/
 		.setDescription('WHO\'S THAT POKEMON?')
+        /*.setDescriptionLocalizations({
+			pl: 'Rasa psa',
+			de: 'Hunderasse',
+		})*/
+        .setDMPermission(false)
         .addIntegerOption((option) =>
-            option
-                .setName('gen-start')
-                .setDescription('Test')
-                .setRequired(false)
-                .addChoices(
-                    { name: 'One', value: 1 },
-                    { name: 'Two', value: 152 },
-                    { name: 'Three', value: 252 },
-                    { name: 'Four', value: 387 },
-                    { name: 'Five', value: 494 },
-                    { name: 'Six', value: 650 },
-                    { name: 'Seven', value: 722 },
-                    { name: 'Eight', value: 810 },
-                    { name: 'Nine', value: 906 },
-                )
+            option.setName('gen-start')
+            /*.setNameLocalizations({
+			    pl: 'pies',
+			    de: 'hund',
+		    })*/
+            .setDescription('Test')
+            /*.setDescriptionLocalizations({
+			    pl: 'Rasa psa',
+			    de: 'Hunderasse',
+		    })*/
+            .setRequired(false)
+            .setMaxValue(8)
+            .setMinValue(1)
         )
+
         .addIntegerOption((option) =>
-            option
-                .setName('gen-end')
-                .setDescription('Test')
-                .setRequired(false)
-                .addChoices(
-                    { name: 'One', value: 151 },
-                    { name: 'Two', value: 251 },
-                    { name: 'Three', value: 386 },
-                    { name: 'Four', value: 493 },
-                    { name: 'Five', value: 649 },
-                    { name: 'Six', value: 721 },
-                    { name: 'Seven', value: 809 },
-                    { name: 'Eight', value: 905 },
-                    //{ name: 'Nine', value: 1010 },
-                )
+            option.setName('gen-end')
+            /*.setNameLocalizations({
+			    pl: 'pies',
+			    de: 'hund',
+		    })*/
+            .setDescription('Test')
+            /*.setDescriptionLocalizations({
+			    pl: 'Rasa psa',
+			    de: 'Hunderasse',
+		    })*/
+            .setRequired(false)
+            .setMaxValue(8)
+            .setMinValue(1)
         )
+
         .addStringOption((option) =>
-            option
-                .setName('difficulty')
-                .setDescription("What difficulty would you like?")
-                .setRequired(false)
-                .addChoices(
-                    { name: "Easy", value: "easy" },
-                    { name: "Normal", value: "normal" },
-                    { name: "Hard", value: "hard" },
-                    { name: "Help", value: "help" },
-                )
+            option.setName('difficulty')
+            /*.setNameLocalizations({
+			    pl: 'pies',
+			    de: 'hund',
+		    })*/
+            .setDescription("What difficulty would you like?")
+            /*.setDescriptionLocalizations({
+			    pl: 'Rasa psa',
+			    de: 'Hunderasse',
+		    })*/
+            .setRequired(false)
+            .addChoices(
+                { name: "Easy", value: "easy" },
+                { name: "Normal", value: "normal" },
+                { name: "Hard", value: "hard" },
+                { name: "Help", value: "help" },
+            )
         )
+
         .addIntegerOption((option) =>
-            option
-                .setName('bet')
-                .setDescription('Are you a gambling person? Why not risk some points?')
-                .setRequired(false)
+            option.setName('bet')
+            /*.setNameLocalizations({
+			    pl: 'pies',
+			    de: 'hund',
+		    })*/
+            .setDescription('Are you a gambling person? Why not risk some points?')
+            /*.setDescriptionLocalizations({
+			    pl: 'Rasa psa',
+			    de: 'Hunderasse',
+		    })*/
+            .setRequired(false)
+            .setMaxValue(1000)
+            .setMinValue(5)
         )
+
         .addIntegerOption((option) =>
-            option
-                .setName('timer')
-                .setDescription("How long would you like the timer to go for?")
-                .setRequired(false)
-                .addChoices(
-                    { name: '10 Seconds', value: 10000 },
-                    { name: '20 Seconds', value: 20000 },
-                    { name: '30 Seconds', value: 30000 },
-                    { name: '40 Seconds', value: 40000 },
-                    { name: '50 Seconds', value: 50000 },
-                    { name: '1 Minute', value: 60000 },
-                    { name: '1 Minute 30 Seconds', value: 90000 },
-                    { name: '2 Minutes', value: 120000 },
-                    { name: '2 Minutes 30 seconds', value: 150000 },
-                    { name: '3 Minutes', value: 180000 },
-                )
+            option.setName('timer')
+            /*.setNameLocalizations({
+			    pl: 'pies',
+			    de: 'hund',
+		    })*/
+            .setDescription("How long would you like the timer to go for?")
+            /*.setDescriptionLocalizations({
+			    pl: 'Rasa psa',
+			    de: 'Hunderasse',
+		    })*/
+            .setRequired(false)
+            .addChoices(
+                { name: '10 Seconds', value: 10000 },
+                { name: '20 Seconds', value: 20000 },
+                { name: '30 Seconds', value: 30000 },
+                { name: '40 Seconds', value: 40000 },
+                { name: '50 Seconds', value: 50000 },
+                { name: '1 Minute', value: 60000 },
+                { name: '1 Minute 30 Seconds', value: 90000 },
+                { name: '2 Minutes', value: 120000 },
+                { name: '2 Minutes 30 seconds', value: 150000 },
+                { name: '3 Minutes', value: 180000 },
+            )
         ),
 	async execute(interaction) {
 	    commandMetrics(interaction.client, "wtp", interaction.guild.id, interaction.user.id)

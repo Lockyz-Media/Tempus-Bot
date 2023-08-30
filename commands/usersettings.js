@@ -1,11 +1,19 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { PermissionsBitField, EmbedBuilder, InviteGuild, ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle  } = require('discord.js')
+const { PermissionsBitField, EmbedBuilder, InviteGuild, ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle, SlashCommandBuilder } = require('discord.js')
 const { commandMetrics } = require('../functions.js')
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('usersettings')
-		.setDescription('Change User settings'),
+        /*.setNameLocalizations({
+			pl: 'pies',
+			de: 'hund',
+		})*/
+		.setDescription('Change User settings')
+        /*.setDescriptionLocalizations({
+			pl: 'Rasa psa',
+			de: 'Hunderasse',
+		})*/
+        .setDMPermission(false),
 
 	async execute(interaction) {
         commandMetrics(interaction.client, "usersettings", interaction.guild.id, interaction.user.id)

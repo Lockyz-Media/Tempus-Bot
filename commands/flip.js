@@ -1,6 +1,5 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
 const { commandMetrics } = require('../functions.js')
-const {EmbedBuilder} = require('discord.js')
+const { EmbedBuilder, SlashCommandBuilder } = require('discord.js')
 const locale = require('../locale/en.json')
 const SQLite = require("better-sqlite3");
 const sql = new SQLite('./bot.sqlite');
@@ -8,7 +7,16 @@ const sql = new SQLite('./bot.sqlite');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('flip')
-		.setDescription('Flip a basic coin.'),
+        /*.setNameLocalizations({
+			pl: 'pies',
+			de: 'hund',
+		})*/
+		.setDescription('Flip a basic coin.')
+        /*.setDescriptionLocalizations({
+			pl: 'Rasa psa',
+			de: 'Hunderasse',
+		})*/
+        .setDMPermission(false),
 	async execute(interaction) {
         commandMetrics(interaction.client, "flip", interaction.guild.id, interaction.user.id)
         const client = interaction.client

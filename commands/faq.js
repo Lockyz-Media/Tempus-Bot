@@ -1,6 +1,5 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
 const { commandMetrics } = require('../functions.js')
-const { EmbedBuilder, PermissionsBitFieldBitField } = require('discord.js')
+const { SlashCommandBuilder, EmbedBuilder, PermissionsBitFieldBitField } = require('discord.js')
 const locale = require('../locale/en.json')
 const SQLite = require("better-sqlite3");
 const sql = new SQLite('./bot.sqlite');
@@ -8,19 +7,35 @@ const sql = new SQLite('./bot.sqlite');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('faq')
+        /*.setNameLocalizations({
+			pl: 'pies',
+			de: 'hund',
+		})*/
 		.setDescription('Get answers to some of our most asked questions.')
+        /*.setDescriptionLocalizations({
+			pl: 'Rasa psa',
+			de: 'Hunderasse',
+		})*/
+        .setDMPermission(false)
         .addStringOption((option) => 
-			option
-				.setName('question')
-				.setDescription('What question did you want to ask?')
-                .addChoices(
-                    { name: 'When will Pixelmon Tempus Release?', value: 'release_date' },
-                    { name: 'What pixelmon version will Pixelmon Tempus use?', value: 'pixelmon_version' },
-                    { name: 'When will the beta test begin?', value: 'beta_timeframe'},
-                    { name: 'I\'d like to make a suggestion', value: 'suggestion'},
-                    { name: 'My question is not listed.', value: 'unknown_question'},
-                )
-				.setRequired(true)
+			option.setName('question')
+            /*.setNameLocalizations({
+			    pl: 'pies',
+			    de: 'hund',
+		    })*/
+			.setDescription('What question did you want to ask?')
+            /*.setDescriptionLocalizations({
+			    pl: 'Rasa psa',
+			    de: 'Hunderasse',
+		    })*/
+            .addChoices(
+                { name: 'When will Pixelmon Tempus Release?', value: 'release_date' },
+                { name: 'What pixelmon version will Pixelmon Tempus use?', value: 'pixelmon_version' },
+                { name: 'When will the beta test begin?', value: 'beta_timeframe'},
+                { name: 'I\'d like to make a suggestion', value: 'suggestion'},
+                { name: 'My question is not listed.', value: 'unknown_question'},
+            )
+			.setRequired(true)
 		),
 	async execute(interaction) {
         const client = interaction.client

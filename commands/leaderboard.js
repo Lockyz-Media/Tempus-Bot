@@ -1,5 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, Message, ButtonStyle } = require('discord.js')
+const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, Message, ButtonStyle, SlashCommandBuilder } = require('discord.js')
 const { commandMetrics } = require('../functions.js')
 const { embedColours, ownerID, tempusIDs } = require('../config');
 const SQLite = require("better-sqlite3");
@@ -10,19 +9,35 @@ const locale = require('../locale/en.json')
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('leaderboard')
+		/*.setNameLocalizations({
+			pl: 'pies',
+			de: 'hund',
+		})*/
 		.setDescription('Show the current top XP users.')
+		/*.setDescriptionLocalizations({
+			pl: 'Rasa psa',
+			de: 'Hunderasse',
+		})*/
+		.setDMPermission(false)
 		.addStringOption((option) =>
-            option
-                .setName('leaderboard')
-                .setDescription('Which leaderboard did you wanna use?')
-                .setRequired(true)
-                .addChoices(
-                    { name: 'Top 5', value: 'top5'},
-                    { name: 'Top 10', value: 'top10'},
-                    { name: 'Top 15', value: 'top15'},
-                    { name: 'Top 20', value: 'top20'},
-					{ name: 'Top 25', value: 'top25'},
-                )
+            option.setName('leaderboard')
+			/*.setNameLocalizations({
+				pl: 'pies',
+				de: 'hund',
+			})*/
+            .setDescription('Which leaderboard did you wanna use?')
+			/*.setDescriptionLocalizations({
+				pl: 'Rasa psa',
+				de: 'Hunderasse',
+			})*/
+            .setRequired(true)
+            .addChoices(
+                { name: 'Top 5', value: 'top5'},
+                { name: 'Top 10', value: 'top10'},
+                { name: 'Top 15', value: 'top15'},
+                { name: 'Top 20', value: 'top20'},
+				{ name: 'Top 25', value: 'top25'},
+            )
         ),
 	async execute(interaction) {
 		commandMetrics(interaction.client, "leaderboard", interaction.guild.id, interaction.user.id)

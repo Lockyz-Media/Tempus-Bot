@@ -1,0 +1,4 @@
+- All changes MUST be made as part of a pull request.
+- Only Robin Painter can merge changes. Please message them if your changes are high priority.
+- All unfinished features can be found in the Projects tab.
+- Only 1 pull request per "feature"

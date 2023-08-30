@@ -1,13 +1,13 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, Message, ButtonStyle } = require('discord.js');
-const { embedColours, ownerID } = require('../config');
+const { embedColours, ownerID, tempusIDs } = require('../config');
 
 module.exports = {
 	name: 'messageUpdate',
 	execute(oldMessage, newMessage) {
 		const client = newMessage.client
 		const user = newMessage.user
-		var tempusID = '516551738249969675'
-		var logsID = '635300240819486732'
+		var tempusID = tempusIDs.guild
+		var logsID = tempusIDs.logs
 
 		if(newMessage.guild.id != tempusID) {
 			return;

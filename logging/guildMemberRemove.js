@@ -1,13 +1,13 @@
 const { EmbedBuilder } = require('discord.js');
-const { embedColours, ownerID } = require('../config');
+const { embedColours, ownerID, tempusIDs } = require('../config');
 
 module.exports = {
 	name: 'guildMemberRemove',
 	execute(member) {
 		const client = member.client
 		const user = member.user
-		var tempusID = '516551738249969675'
-		var logsID = '635300240819486732'
+		var tempusID = tempusIDs.guild
+		var logsID = tempusIDs.logs
 
 		if(member.guild.id != tempusID) {
 			return;

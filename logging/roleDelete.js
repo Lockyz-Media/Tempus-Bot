@@ -1,12 +1,12 @@
 const { EmbedBuilder } = require('discord.js');
-const { embedColor, ownerID } = require('../config');
+const { embedColor, ownerID, tempusIDs, embedColours } = require('../config');
 
 module.exports = {
 	name: 'roleDelete',
 	execute(role) {
 		const client = role.client
-		var tempusID = '516551738249969675'
-		var logsID = '635300240819486732'
+		var tempusID = tempusIDs.guild
+		var logsID = tempusIDs.logs
 
 		if(role.guild.id !== tempusID) {
 			return;

@@ -1,5 +1,5 @@
 const { EmbedBuilder, PermissionsBitField, SlashCommandBuilder } = require('discord.js')
-const { commandMetrics } = require('../functions.js')
+const { commandMetrics, logFunction } = require('../functions.js')
 const locale = require('../locale/en.json')
 const SQLite = require("better-sqlite3");
 const sql = new SQLite('./bot.sqlite');
@@ -415,6 +415,7 @@ module.exports = {
 
         if(interaction.options.getSubcommand() === 'ban') {
             if(interaction.member.permissions.has(PermissionsBitField.Flags.Administrator) || interaction.member.permissions.has(PermissionsBitField.Flags.ManageGuild) || interaction.member.permissions.has(PermissionsBitField.Flags.BanMembers)) {
+                logFunction(client, interaction.channel.id, interaction.user.id, "{userID} has used the Punish Ban command", 1, true, false);
                 const reason = interaction.options.getString('reason')
                 const customReason = interaction.options.getString('custom_reason')
                 const sendCustomReason = interaction.options.getBoolean('send_reason')
@@ -452,6 +453,7 @@ module.exports = {
 
         if(interaction.options.getSubcommand() === 'kick') {
             if(interaction.member.permissions.has(PermissionsBitField.Flags.Administrator) || interaction.member.permissions.has(PermissionsBitField.Flags.ManageGuild) || interaction.member.permissions.has(PermissionsBitField.Flags.BanMembers) || interaction.member.permissions.has(PermissionsBitField.Flags.KickMembers)) {
+                logFunction(client, interaction.channel.id, interaction.user.id, "{userID} has used the Punish Kick command", 1, true, false);
                 const user = interaction.options.getUser('user')
                 const reason = interaction.options.getString('reason')
                 const customReason = interaction.options.getString('custom_reason')
@@ -489,6 +491,7 @@ module.exports = {
 
         if(interaction.options.getSubcommand() === 'warn') {
             if(interaction.member.permissions.has(PermissionsBitField.Flags.Administrator) || interaction.member.permissions.has(PermissionsBitField.Flags.ManageGuild) || interaction.member.permissions.has(PermissionsBitField.Flags.BanMembers) || interaction.member.permissions.has(PermissionsBitField.Flags.KickMembers)) {
+                logFunction(client, interaction.channel.id, interaction.user.id, "{userID} has used the Punish Warn command", 1, true, false);
                 const user = interaction.options.getUser('user')
                 const reason = interaction.options.getString('reason')
                 const customReason = interaction.options.getString('custom_reason')
@@ -529,6 +532,7 @@ module.exports = {
 
         if(interaction.options.getSubcommand() === 'query') {
             if(interaction.member.permissions.has(PermissionsBitField.Flags.Administrator) || interaction.member.permissions.has(PermissionsBitField.Flags.ManageGuild) || interaction.member.permissions.has(PermissionsBitField.Flags.BanMembers) || interaction.member.permissions.has(PermissionsBitField.Flags.KickMembers)) {
+                logFunction(client, interaction.channel.id, interaction.user.id, "{userID} has used the Punish Query command", 1, true, false);
                 const user = interaction.options.getUser('user')
                 const member = interaction.guild.members.cache.get(user.id)
 

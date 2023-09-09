@@ -1,9 +1,11 @@
 const SQLite = require("better-sqlite3");
 const sql = new SQLite('./bot.sqlite');
 const sql1 = new SQLite('../globalDBs/commandMetrics.sqlite');
+const { EmbedBuilder } = require('discord.js');
+const config = require("../config");
 
 module.exports = {
-    logFunction: function(client, channelID, userID, logDescription, logType, sendToConsole){
+    logFunction: function(client, channelID, userID, logDescription, logType, sendToConsole, sendToLogChannel){
         const logTypes = [
             "positive",
             "negative",
@@ -19,9 +21,34 @@ module.exports = {
 
         var logText = logDescription.replace("{userID}", userID).replace("{channelID}", channelID)
 
-        client.channels.get(config.botIDs.logging).send({ content: logText })
+        var embedColour = config.embedColours.neutral
+
+        if(loogType === "positive") {
+            embedColour = config.embedColours.positive
+        } else if(loogType === "negative") {
+            embedColour = config.embedColours.negative
+        } else {
+            embedColour = config.embedColours.neutral
+        }
+
+        const embed = new EmbedBuilder()
+            .setDescription(logText)
+            .setColor(embedColour)
+            .setTimestamp();
+
+        if(sendToLogChannel) {
+            if(sendToLogChannel === true) {
+                client.channels.get(config.tempusIDs.logging).send({ embeds: [embed] })
+            }
+        } else if(sendToLogChannel === false) { } else {
+            client.channels.get(config.tempusIDs.logging).send({ embeds: [embed] })
+        }
 
         if(sendToConsole) {
+            if(sendToConsole === true) {
+                console.log(logText)
+            }
+        } else if(sendToConsole === false) { } else {
             console.log(logText)
         }
     },

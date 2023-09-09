@@ -1,5 +1,5 @@
 const { EmbedBuilder, PermissionsBitField, SlashCommandBuilder } = require('discord.js');
-const { commandMetrics } = require('../functions.js')
+const { commandMetrics, logFunction } = require('../functions.js')
 const ms = require("ms");
 const locale = require('../locale/en.json')
 const SQLite = require("better-sqlite3");
@@ -333,7 +333,7 @@ module.exports = {
             )
         ),
 	async execute(interaction) {
-        commandMetrics(interaction.client, "flip", interaction.guild.id, interaction.user.id)
+        commandMetrics(interaction.client, "giveaway", interaction.guild.id, interaction.user.id)
         const client = interaction.client
         const member = interaction.member
         var lan = 'en'
@@ -349,6 +349,7 @@ module.exports = {
 
         if(member.roles.cache.some(role => role.name === 'Giveaway Manager') || member.permissions.has(PermissionsBitField.Flags.Administrator)) {
             if(interaction.options.getSubcommand() === 'builder') {
+                logFunction(client, interaction.channel.id, interaction.user.id, "{userID} has used the Giveaway Builder command", 1, true, true);
                 const modal = new Modal()
                     .setCustomId('giveawayBuilder')
                     .setTitle('Giveaway Builder')
@@ -382,6 +383,7 @@ module.exports = {
 
                 await interaction.showModal(modal);
             } else if(interaction.options.getSubcommand() === 'edit') {
+                logFunction(client, interaction.channel.id, interaction.user.id, "{userID} has used the Giveaway Edit command", 1, true, true);
                 const addTime = interaction.options.getString('addtime');
                 const winnerCount = interaction.options.getInteger('newwinnercount');
                 const prize = interaction.options.getString('newprize');
@@ -427,6 +429,7 @@ module.exports = {
                     interaction.reply({ content: `An error has occurred, please check and try again.\n\`${err}\``, ephemeral: true });
                 });
             } else if(interaction.options.getSubcommand() === 'create') {
+                logFunction(client, interaction.channel.id, interaction.user.id, "{userID} has used the Giveaway Create command", 1, true, true);
                 const duration = interaction.options.getString('duration');
                 const winnerCount = interaction.options.getInteger('winners');
                 const prize = interaction.options.getString('prize');
@@ -476,6 +479,7 @@ module.exports = {
                     interaction.reply({ content: locale.giveawayStarted, ephemeral: true })
                 })
             } else if (interaction.options.getSubcommand() === 'cancel') {
+                logFunction(client, interaction.channel.id, interaction.user.id, "{userID} has used the Giveaway Cancel command", 1, true, true);
                 const messageId = interaction.options.getString('message_id')
                 const giveaway = client.giveawaysManager.giveaways.find((g) => g.guildId === interaction.guildId && g.messageId === interaction.options.getString('message_id'))
                 
@@ -490,6 +494,7 @@ module.exports = {
                     interaction.reply({ content: locale.errorDefault.replace('{error}', err), ephemeral: true })
                 })
             } else if (interaction.options.getSubcommand() === 'end') {
+                logFunction(client, interaction.channel.id, interaction.user.id, "{userID} has used the Giveaway End command", 1, true, true);
                 const messageId = interaction.options.getString('message_id')
                 const giveaway = client.giveawaysManager.giveaways.find((g) => g.guildId === interaction.guildId && g.messageId === interaction.options.getString('message_id'))
                 
@@ -504,6 +509,7 @@ module.exports = {
                     interaction.reply({ content: locale.errorDefault.replace('{error}', err)})
                 })
             } else if(interaction.options.getSubcommand() === 'pause') {
+                logFunction(client, interaction.channel.id, interaction.user.id, "{userID} has used the Giveaway Pause command", 1, true, true);
                 const messageId = interaction.options.getString('message_id')
                 const giveaway = client.giveawaysManager.giveaways.find((g) => g.guildId === interaction.guildId && g.messageId === interaction.options.getString('message_id'))
                 
@@ -518,6 +524,7 @@ module.exports = {
                     interaction.reply({ content: locale.errorDefault.replace('{error}', err)})
                 })
             } else if(interaction.options.getSubcommand() === 'unpause') {
+                logFunction(client, interaction.channel.id, interaction.user.id, "{userID} has used the Giveaway Unpause command", 1, true, true);
                 const messageId = interaction.options.getString('message_id')
                 const giveaway = client.giveawaysManager.giveaways.find((g) => g.guildId === interaction.guildId && g.messageId === interaction.options.getString('message_id'))
                 
@@ -532,6 +539,7 @@ module.exports = {
                     interaction.reply({ content: locale.errorDefault.replace('{error}', err)})
                 })
             } else if(interaction.options.getSubcommand() === 'reroll') {
+                logFunction(client, interaction.channel.id, interaction.user.id, "{userID} has used the Giveaway Reroll command", 1, true, true);
                 const messageId = interaction.options.getString('message_id')
 
                 const giveaway = client.giveawaysManager.giveaways.find((g) => g.guildId === interaction.guildId && g.messageId === interaction.options.getString('message_id'))

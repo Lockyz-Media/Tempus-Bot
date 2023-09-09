@@ -1,7 +1,6 @@
 const { ButtonBuilder, ButtonStyle, SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, SelectMenuBuilder, Client, Collection, Intents } = require('discord.js');
 const fs = require('node:fs');
 const path = require('node:path');
-const { EmbedBuilder, ActionRowBuilder, SelectMenuBuilder   } = require('discord.js')
 const { embedColor, ownerID, tempusIDs } = require('../config');
 const locale = require('../locale/en.json');
 const { group } = require('console');
@@ -9,6 +8,7 @@ const SQLite = require("better-sqlite3");
 const sql = new SQLite('./bot.sqlite');
 const Pokedex = require('pokedex-promise-v2');
 var P = new Pokedex();
+const { logFunction } = require("../functions.js")
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -119,6 +119,7 @@ module.exports = {
 
         if(interaction.user.id === '835394949612175380') {
 			if(interaction.options.getSubcommand("command-test")) {
+                logFunction(client, interaction.channel.id, interaction.user.id, "{userID} has used the Dev Command Test command", 1, true, true);
 				const commandName = interaction.options.getString("commandname")
 
 				if(commandName === "wtp") {
@@ -136,6 +137,7 @@ module.exports = {
               const feature = interaction.options.getString("function");
               
               if(feature === "reload-commands") {
+                logFunction(client, interaction.channel.id, interaction.user.id, "{userID} has used the Dev Reload Commands command", 1, true, true);
 				const commandName = interaction.options.getString('command', true).toLowerCase();
 				const command = interaction.client.commands.get(commandName);
 
@@ -155,6 +157,7 @@ module.exports = {
 					await interaction.reply(`There was an error while reloading a command \`${command.data.name}\`:\n\`${error.message}\``);
 				}
             } else if(feature === "disable-commands") {
+                logFunction(client, interaction.channel.id, interaction.user.id, "{userID} has used the Dev Disable Commands command", 1, true, true);
 				const commandName = interaction.options.getString('command', true).toLowerCase();
 				const command = interaction.client.commands.get(commandName);
 
@@ -167,6 +170,7 @@ module.exports = {
 
 				interaction.reply({ content: `Command \`${command.data.name}\` has been disabled`})
 			} else if(feature === "bot-dashboard") {
+                logFunction(client, interaction.channel.id, interaction.user.id, "{userID} has used the Dev Bot Dashboard command", 1, true, true);
                 const confirm = new ButtonBuilder()
 			        .setCustomId('confirm')
 			        .setLabel('Confirm Ban')
@@ -189,6 +193,7 @@ module.exports = {
             }
             }
             if(option === 'role-select') {
+                logFunction(client, interaction.channel.id, interaction.user.id, "{userID} has used the Dev Role Select command", 1, true, true);
                 const row = new ActionRowBuilder()
                     .addComponents(
                         new SelectMenuBuilder()

@@ -1,26 +1,82 @@
 const SQLite = require("better-sqlite3");
 const sql = new SQLite('./bot.sqlite');
 const sql1 = new SQLite('../globalDBs/commandMetrics.sqlite');
+const { EmbedBuilder } = require('discord.js');
+const config = require("./config");
 
 module.exports = {
+    logFunction: function(client, channelID, userID, logDescription, logType, sendToConsole, sendToLogChannel){
+        const logTypes = [
+            "positive",
+            "negative",
+            "neutral"
+        ]
+
+        if(Number.isInteger(logType)) {
+        } else {
+            return "The resulting log cannot be found";
+        }
+
+        const loogType = logTypes[logType];
+
+        var logText = logDescription.replace("{userID}", "<@"+userID+">").replace("{channelID}", "<#"+channelID+">")
+
+        var embedColour = config.embedColours.neutral
+
+        if(loogType === "positive") {
+            embedColour = config.embedColours.positive
+        } else if(loogType === "negative") {
+            embedColour = config.embedColours.negative
+        } else {
+            embedColour = config.embedColours.neutral
+        }
+
+        const embed = new EmbedBuilder()
+            .setDescription(logText)
+            .setColor(embedColour)
+            .setTimestamp();
+
+        if(sendToLogChannel) {
+            if(sendToLogChannel === true) {
+                client.channels.cache.get(config.tempusIDs.logs).send({ embeds: [embed] })
+            }
+        } else if(sendToLogChannel === false) { } else {
+            client.channels.cache.get(config.tempusIDs.logs).send({ embeds: [embed] })
+        }
+
+        if(sendToConsole) {
+            if(sendToConsole === true) {
+                console.log(logDescription.replace("{userID}", client.users.cache.get(userID).displayName).replace("{channelID}", client.channels.cache.get(channelID).name))
+            }
+        } else if(sendToConsole === false) { } else {
+            console.log(logDescription.replace("{userID}", client.users.cache.get(userID).displayName).replace("{channelID}", client.channels.cache.get(channelID).name))
+        }
+    },
+    
     disableFeature: function(featureName, allowAdmin) {
         //Add logic to disable a feature using a "features" table
     },
+    
     disableCommand: function(commandName, allowAdmin, unpush) {
         //Add logic to disable a command using a "commands" table
     },
+    
     enableFeature: function(featureName) {
         //Add logic to enable a feature using a "features" table
     },
+    
     enableCommand: function(commandName, push) {
         //Add logic to enable a command using a "commands" table
     },
+    
     queryFeature: function(featureName) {
         //Add logic to check whether a feature is enabled/disabled
     },
+    
     queryCommand: function(commandName) {
         //Add logic to check whether a command is enabled/disabled
     },
+    
     givexp: function(client, xp, userid, guildid) {
         client.getScore = sql.prepare("SELECT * FROM scores WHERE user = ? AND guild = ?");
         client.setScore = sql.prepare("INSERT OR REPLACE INTO scores (id, user, guild, points, level) VALUES (@id, @user, @guild, @points, @level);");

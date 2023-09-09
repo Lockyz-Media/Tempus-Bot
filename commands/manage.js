@@ -1,5 +1,5 @@
 const { EmbedBuilder, PermissionsBitField, SlashCommandBuilder } = require('discord.js')
-const { commandMetrics } = require('../functions.js')
+const { commandMetrics, logFunction } = require('../functions.js')
 const SQLite = require("better-sqlite3");
 const sql = new SQLite('./bot.sqlite');
 const { givexp, takexp, resetxp } = require("../functions.js")
@@ -253,6 +253,7 @@ module.exports = {
             client.setUserExclude = sql.prepare("INSERT OR REPLACE INTO excludesusers (userID, nitroscam, pointssystem, autologs) VALUES (@userID, @nitroscam, @pointssystem, @autologs);");
 
             if(interaction.options.getSubcommand() === 'exclude') {
+                logFunction(client, interaction.channel.id, interaction.user.id, "{userID} has used the Manage Exclude command", 1, true, true);
                 const user = interaction.options.getUser('user');
                 const autonitroscam = interaction.options.getString('autonitroscam');
                 const pointssystem = interaction.options.getString('pointssystem');
@@ -292,6 +293,7 @@ module.exports = {
             }
 
             if(interaction.options.getSubcommand() === 'botstatus') {
+                logFunction(client, interaction.channel.id, interaction.user.id, "{userID} has used the Manage Bot Status command", 1, true, true);
                 const enable = interaction.options.getString('enable')
                 const statusTy = interaction.options.getString('statustype')
                 const activityTy = interaction.options.getString('activitytype')
@@ -319,6 +321,7 @@ module.exports = {
             }
 
             if(interaction.options.getSubcommand() === 'points') {
+                logFunction(client, interaction.channel.id, interaction.user.id, "{userID} has used the Manage Points command", 1, true, true);
                 const user = interaction.options.getUser('user');
                 const amount = interaction.options.getInteger('amount');
                 const giveTake = interaction.options.getString('function');

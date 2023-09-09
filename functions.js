@@ -2,7 +2,7 @@ const SQLite = require("better-sqlite3");
 const sql = new SQLite('./bot.sqlite');
 const sql1 = new SQLite('../globalDBs/commandMetrics.sqlite');
 const { EmbedBuilder } = require('discord.js');
-const config = require("../config");
+const config = require("./config");
 
 module.exports = {
     logFunction: function(client, channelID, userID, logDescription, logType, sendToConsole, sendToLogChannel){
@@ -19,7 +19,7 @@ module.exports = {
 
         const loogType = logTypes[logType];
 
-        var logText = logDescription.replace("{userID}", userID).replace("{channelID}", channelID)
+        var logText = logDescription.replace("{userID}", "<@"+userID+">").replace("{channelID}", "<#"+channelID+">")
 
         var embedColour = config.embedColours.neutral
 
@@ -38,18 +38,18 @@ module.exports = {
 
         if(sendToLogChannel) {
             if(sendToLogChannel === true) {
-                client.channels.get(config.tempusIDs.logging).send({ embeds: [embed] })
+                client.channels.cache.get(config.tempusIDs.logs).send({ embeds: [embed] })
             }
         } else if(sendToLogChannel === false) { } else {
-            client.channels.get(config.tempusIDs.logging).send({ embeds: [embed] })
+            client.channels.cache.get(config.tempusIDs.logs).send({ embeds: [embed] })
         }
 
         if(sendToConsole) {
             if(sendToConsole === true) {
-                console.log(logText)
+                console.log(logDescription.replace("{userID}", client.users.cache.get(userID).displayName).replace("{channelID}", client.channels.cache.get(channelID).name))
             }
         } else if(sendToConsole === false) { } else {
-            console.log(logText)
+            console.log(logDescription.replace("{userID}", client.users.cache.get(userID).displayName).replace("{channelID}", client.channels.cache.get(channelID).name))
         }
     },
     

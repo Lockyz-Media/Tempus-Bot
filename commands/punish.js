@@ -94,7 +94,7 @@ module.exports = {
 			        pl: 'pies',
 			        de: 'hund',
 		        })*/
-                .setDescription('Do you want to send your custom reason to our developers so they can add it to the list of default reasons?')
+                .setDescription('Do you want to send your custom reason to our developers?')
                 /*.setDescriptionLocalizations({
 			        pl: 'Rasa psa',
 			        de: 'Hunderasse',
@@ -180,7 +180,7 @@ module.exports = {
 			        pl: 'pies',
 			        de: 'hund',
 		        })*/
-                .setDescription('Do you want to send your custom reason to our developers so they can add it to the list of default reasons?')
+                .setDescription('Do you want to send your custom reason to our developers?')
                 /*.setDescriptionLocalizations({
 			        pl: 'Rasa psa',
 			        de: 'Hunderasse',
@@ -266,7 +266,7 @@ module.exports = {
 			        pl: 'pies',
 			        de: 'hund',
 		        })*/
-                .setDescription('Do you want to send your custom reason to our developers so they can add it to the list of default reasons?')
+                .setDescription('Do you want to send your custom reason to our developers?')
                 /*.setDescriptionLocalizations({
 			        pl: 'Rasa psa',
 			        de: 'Hunderasse',
@@ -352,7 +352,7 @@ module.exports = {
 			        pl: 'pies',
 			        de: 'hund',
 		        })
-                .setDescription('Do you want to send your custom reason to our developers so they can add it to the list of default reasons?')
+                .setDescription('Do you want to send your custom reason to our developers?')
                 .setDescriptionLocalizations({
 			        pl: 'Rasa psa',
 			        de: 'Hunderasse',

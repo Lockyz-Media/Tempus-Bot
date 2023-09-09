@@ -1,7 +1,6 @@
 const { ButtonBuilder, ButtonStyle, SlashCommandBuilder, EmbedBuilder, ActionRowBuilder, SelectMenuBuilder, Client, Collection, Intents } = require('discord.js');
 const fs = require('node:fs');
 const path = require('node:path');
-const { EmbedBuilder, ActionRowBuilder, SelectMenuBuilder   } = require('discord.js')
 const { embedColor, ownerID, tempusIDs } = require('../config');
 const locale = require('../locale/en.json');
 const { group } = require('console');

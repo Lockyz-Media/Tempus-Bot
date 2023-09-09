@@ -1,4 +1,4 @@
-const { EmbedBuilder, PermissionsBitField, SlashCommandBuilder } = require('discord.js');
+const { EmbedBuilder, PermissionsBitField, SlashCommandBuilder, ChannelType } = require('discord.js');
 const { commandMetrics, logFunction } = require('../functions.js')
 const ms = require("ms");
 const locale = require('../locale/en.json')

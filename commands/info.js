@@ -42,7 +42,7 @@ module.exports = {
                 { name: "Discord.js Version", value: "v"+discordVersion, inline: true },
                 { name: "Node Version", value: "v"+process.version, inline: true },
                 { name: "Version", value: "v30092022", inline: true },
-                { name: "Bug Tracker", value: "https://tracker.lockyzdev.net/set_project.php?project_id=10", inline: true }
+                { name: "Bug Tracker", value: "https://lockyzdev.mantishub.io/set_project.php?project_id=3", inline: true }
             ])
             .setFooter({ text: "©2018-"+n+" Lockyz Dev"});
         interaction.reply({ embeds: [embed] })

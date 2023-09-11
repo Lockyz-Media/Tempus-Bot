@@ -40,8 +40,9 @@ module.exports = {
                 { name: "Uptime", value: botUptime, inline: true },
                 { name: "Memory", value: Math.round(memUsage)+"MB", inline: true },
                 { name: "Discord.js Version", value: "v"+discordVersion, inline: true },
-                { name: "Node Version", value: "v"+process.version, inline: true },
-                { name: "Version", value: "v30092022", inline: true },
+		{ name: "Bit Core Version", value: "V4.1.0 *modified*", inline: true },
+                { name: "Node Version", value: process.version, inline: true },
+                { name: "Version", value: "v4.2.0", inline: true },
                 { name: "Bug Tracker", value: "https://lockyzdev.mantishub.io/set_project.php?project_id=3", inline: true }
             ])
             .setFooter({ text: "©2018-"+n+" Lockyz Dev"});

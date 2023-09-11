@@ -40,7 +40,7 @@ module.exports = {
         }
 
         if(!score) {
-            score = { id: `${message.guild.id}-${message.user.id}`, user: message.user.id, guild: message.guild.id, points: 0, level: 0 };
+            score = { id: `${message.guild.id}-${message.author.id}`, user: message.author.id, guild: message.guild.id, points: 0, level: 0 };
         }
         
         if(message.type === 7) {

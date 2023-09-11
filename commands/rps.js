@@ -30,7 +30,7 @@ module.exports = {
         )
 
         .addIntegerOption((option) =>
-            option.setName('Your Choice')
+            option.setName('choice')
             .setDescription("Rock Paper or Scissors?")
             .setRequired(true)
             .addChoices(
@@ -38,10 +38,35 @@ module.exports = {
                 { name: 'Paper', value: 2 },
                 { name: 'Scissors', value: 3 },
             )
+        )
+        .addIntegerOption((option) =>
+            option.setName('timer')
+            /*.setNameLocalizations({
+			    pl: 'pies',
+			    de: 'hund',
+		    })*/
+            .setDescription("How long would you like the timer to go for?")
+            /*.setDescriptionLocalizations({
+			    pl: 'Rasa psa',
+			    de: 'Hunderasse',
+		    })*/
+            .setRequired(false)
+            .addChoices(
+                { name: '10 Seconds', value: 10000 },
+                { name: '20 Seconds', value: 20000 },
+                { name: '30 Seconds', value: 30000 },
+                { name: '40 Seconds', value: 40000 },
+                { name: '50 Seconds', value: 50000 },
+                { name: '1 Minute', value: 60000 },
+                { name: '1 Minute 30 Seconds', value: 90000 },
+                { name: '2 Minutes', value: 120000 },
+                { name: '2 Minutes 30 seconds', value: 150000 },
+                { name: '3 Minutes', value: 180000 },
+            )
         ),
 	async execute(interaction) {
 	    commandMetrics(interaction.client, "wtp", interaction.guild.id, interaction.user.id)
-        await interaction.deferReply();
+        //await interaction.deferReply();
         const client = interaction.client
         const member = interaction.member
         //var lan = 'en'
@@ -58,7 +83,10 @@ module.exports = {
         //const betPoints = interaction.options.getInteger('bet');
         const choice = interaction.options.getInteger('choice');
         const playerTwo = interaction.options.getUser('user');
+        const timerInt = interaction.options.getInteger('timer');
         const playerOne = interaction.user
+        var timer = 30000;
+        const channel = interaction.channel.id
 
         var rCount = 1;
         var pot = 5;
@@ -69,7 +97,11 @@ module.exports = {
             [ "scissors", "rock" ],
         ]
 
-        var p1Choice = weaknesses[choice];
+        if(timerInt) {
+            timer = timerInt; 
+         }
+
+        var p1Choice = weaknesses[choice-1];
 
         /*if(betPoints) {
             pot = pot+betPoints;
@@ -79,13 +111,20 @@ module.exports = {
             }
         }*/
         var isGame = true;
+        var isWin = false;
 
+        //interaction.channel.send({ content: "<@"+playerTwo.id+">, you have been challenged to a RPS game, please enter your choice below in the format of `!choose {choice}`. *Player 1 has already chosen*"})
         interaction.reply({ content: "Game Starts Now", ephemeral: true }).then(() => {
+            //interaction.channel.send({ content: "<@"+playerTwo.id+">, you have been challenged to a RPS game, please enter your choice below in the format of `!choose {choice}`. *Player 1 has already chosen*"})
+            client.channels.cache.get(channel).send({ content: "<@"+playerTwo.id+">, you have been challenged to a RPS game, please enter your choice below in the format of `!choose {choice}`. *Player 1 has already chosen*"})
+            //console.log(p1Choice[1]);
             const collectorFilter = response => {
                 if(response.author.bot === false) {
                     if(response.author.id === playerTwo.id) {
+                        //console.log(response.content)
                         if(response.content.includes("!choose")) {
                             if(response.content.toLowerCase() === "!choose "+p1Choice[1]) {
+                                isWin = true;
                                 return true;
                             } else {
                                 interaction.channel.send({ content: "<@"+playerOne.id+"> has won!" })
@@ -99,8 +138,10 @@ module.exports = {
 
         interaction.channel.awaitMessages({ filter: collectorFilter, time: timer, max: 1, errors: ['time']})
             .then(messages => {
-                if(isGame) {
+                if(isWin) {
                     interaction.channel.send({ content: "<@"+playerTwo.id+"> has won!" })
+                    response.react("✅")
+                    isGame = false;
                 } else {
                     return;
                 }
@@ -109,10 +150,7 @@ module.exports = {
                 if(isGame === false) return;
                 interaction.channel.send({ content: "<@"+playerTwo.id+"> has taken too long!" })
             })
-    })
-        //interaction.channel.send({ content: "<@"+playerTwo.id+">, you have been challenged to a RPS game, please enter your choice below. *Player 1 has already chosen*"})
-
-        // Bot should
+        })
     }
 };
 

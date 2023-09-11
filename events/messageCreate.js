@@ -38,6 +38,10 @@ module.exports = {
             userset = { userID: message.author.id, userAccess: 'false', levelNotifications: 'true', language: 'en' };
             client.setUsSett.run(userset);
         }
+
+        if(!score) {
+            score = { id: `${message.guild.id}-${message.user.id}`, user: message.user.id, guild: message.guild.id, points: 0, level: 0 };
+        }
         
         if(message.type === 7) {
             if(message.guild.id === tempusID) {

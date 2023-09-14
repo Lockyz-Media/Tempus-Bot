@@ -83,7 +83,7 @@ module.exports = {
             const embed = new EmbedBuilder()
                 .setTitle(locale.flipEmbedTitle)
                 .setDescription(locale.flipDescription.replace('{answer}', answer))
-                .setImage("https://db.lockyzdev.net/botcommands/flip/"+answer1+".jpg")
+                .setImage("https://cdn.lockyzdev.net/botcommands/flip/"+answer1+".jpg")
                 .setFooter({ text: coinName })
                 .setTimestamp();
             interaction.reply({ embeds: [embed] })

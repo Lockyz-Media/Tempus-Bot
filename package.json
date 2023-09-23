@@ -22,7 +22,7 @@
     "discord-giveaways": "^6.0.1",
     "discord.js": "^14.13.0",
     "discordjs-button-pagination": "github:spr1t3-0/discordjs-button-pagination#patch-1",
-    "humanize-duration": "^3.27.1",
+    "humanize-duration": "^3.29.0",
     "moment": "^2.29.1",
     "moment-duration-format": "^2.3.2",
     "ms": "^2.1.3",

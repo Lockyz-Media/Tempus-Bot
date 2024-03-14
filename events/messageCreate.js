@@ -10,7 +10,7 @@ module.exports = {
     execute(message) {
         const client = message.client
         const user = message.author.user
-        const member = message.author
+        const member = message.member
         const guild = message.guild
         var logsID = tempusIDs.logs
         var tempusID = tempusIDs.guild
@@ -101,7 +101,7 @@ module.exports = {
         if(message.guild.id === tempusID)
         {
             // Make sure to go through, clean this up sometime in the future and comment TF outta it
-            if(message.author.roles.cache.some(role => role.id === '850774044512354335') || message.author.roles.cache.some(role => role.id === '516554905142558730') || message.author.roles.cache.some(role => role.id === '1039698571689209857') || message.author.roles.cache.some(role => role.id === '516553151936069659') || message.author.roles.cache.some(role => role.id === '516552949246328838') || message.author.roles.cache.some(role => role.id === '640063699624656937')) {
+            if(message.member.roles.cache.some(role => role.id === '850774044512354335') || message.member.roles.cache.some(role => role.id === '516554905142558730') || message.member.roles.cache.some(role => role.id === '1039698571689209857') || message.member.roles.cache.some(role => role.id === '516553151936069659') || message.member.roles.cache.some(role => role.id === '516552949246328838') || message.member.roles.cache.some(role => role.id === '640063699624656937')) {
 
             } else {
                 if(message.content.toLowerCase().includes("https://discord.gg/")) {
@@ -110,18 +110,11 @@ module.exports = {
                         member.timeout(48*60*60*1000, 'Discord Invite Detected!');
                         const embed = new EmbedBuilder()
                             .setDescription("A user named <@"+message.author.id+"> has been detected as a spam bot, their message deleted and the user muted.")
+                        	.addFields({ name: 'Content', value: message.cleanContent, inline: false })
                             .setColor(embedColours.negative)
                             .setFooter({ text: 'User ID '+ message.author.id })
                             .setTimestamp();
-
-                        const embed2 = new EmbedBuilder()
-                            .setDescription(message.content)
-                            .setColor(embedColours.negative)
-                            .setFooter({ text: 'User ID '+ message.author.id })
-                            .setTimestamp();
-                    
                         client.channels.cache.get(logsID).send({ embeds: [embed] })
-                        client.channels.cache.get(logsID.send({ embeds: [embed2] }))
                         message.delete();
                     }
                 }

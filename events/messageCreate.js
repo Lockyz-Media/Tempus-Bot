@@ -104,18 +104,65 @@ module.exports = {
             if(message.member.roles.cache.some(role => role.id === '850774044512354335') || message.member.roles.cache.some(role => role.id === '516554905142558730') || message.member.roles.cache.some(role => role.id === '1039698571689209857') || message.member.roles.cache.some(role => role.id === '516553151936069659') || message.member.roles.cache.some(role => role.id === '516552949246328838') || message.member.roles.cache.some(role => role.id === '640063699624656937')) {
 
             } else {
-                if(message.content.toLowerCase().includes("https://discord.gg/")) {
-                    if(message.member.kickable) {
-
-                        member.timeout(48*60*60*1000, 'Discord Invite Detected!');
-                        const embed = new EmbedBuilder()
-                            .setDescription("A user named <@"+message.author.id+"> has been detected as a spam bot, their message deleted and the user muted.")
-                        	.addFields({ name: 'Content', value: message.cleanContent, inline: false })
-                            .setColor(embedColours.negative)
-                            .setFooter({ text: 'User ID '+ message.author.id })
-                            .setTimestamp();
-                        client.channels.cache.get(logsID).send({ embeds: [embed] })
-                        message.delete();
+                if(message.member.kickable) {
+                    if(message.content.toLowerCase().includes("https://discord.gg/")) {
+                        if(message.content.toLowerCase().includes("only")) {
+                            if(message.content.toLowerCase().includes("fan")) {
+                                if(message.content.toLowerCase().includes("teen")) {
+                                    if(message.content.toLowerCase().includes("leak")) {
+                                        message.guild.members.ban(message.author);
+                                        const embed = new EmbedBuilder()
+                                            .setDescription("A user named <@"+message.author.id+"> has been detected as a spam bot, their message deleted and the user banned. They have passed 5/5 checks for a spam bot!")
+                        	                .addFields({ name: 'Content', value: message.cleanContent, inline: false })
+                                            .setColor(embedColours.negative)
+                                            .setFooter({ text: 'User ID '+ message.author.id })
+                                            .setTimestamp();
+                                        client.channels.cache.get(logsID).send({ embeds: [embed] })
+                                        message.delete();
+                                    } else {
+                                        member.timeout(48*60*60*1000, 'Discord Invite Detected!');
+                                        const embed = new EmbedBuilder()
+                                            .setDescription("A user named <@"+message.author.id+"> has sent a Discord Invite or could be a spam bot, their message has been deleted and the user has been muted. They have passed 4/5 checks for a spam bot!")
+                                            .addFields({ name: 'Content', value: message.cleanContent, inline: false })
+                                            .setColor(embedColours.negative)
+                                            .setFooter({ text: 'User ID '+ message.author.id })
+                                            .setTimestamp();
+                                        client.channels.cache.get(logsID).send({ embeds: [embed] })
+                                        message.delete();
+                                    }
+                                } else {
+                                    member.timeout(48*60*60*1000, 'Discord Invite Detected!');
+                                    const embed = new EmbedBuilder()
+                                        .setDescription("A user named <@"+message.author.id+"> has sent a Discord Invite or could be a spam bot, their message has been deleted and the user has been muted. They have passed 3/5 checks for a spam bot!")
+                        	            .addFields({ name: 'Content', value: message.cleanContent, inline: false })
+                                        .setColor(embedColours.negative)
+                                        .setFooter({ text: 'User ID '+ message.author.id })
+                                        .setTimestamp();
+                                    client.channels.cache.get(logsID).send({ embeds: [embed] })
+                                    message.delete();
+                                }
+                            } else {
+                                member.timeout(48*60*60*1000, 'Discord Invite Detected!');
+                                const embed = new EmbedBuilder()
+                                    .setDescription("A user named <@"+message.author.id+"> has sent a Discord Invite or could be a spam bot, their message has been deleted and the user has been muted. They have passed 2/5 checks for a spam bot!")
+                        	        .addFields({ name: 'Content', value: message.cleanContent, inline: false })
+                                    .setColor(embedColours.negative)
+                                    .setFooter({ text: 'User ID '+ message.author.id })
+                                    .setTimestamp();
+                                client.channels.cache.get(logsID).send({ embeds: [embed] })
+                                message.delete();
+                            }
+                        } else {
+                            member.timeout(48*60*60*1000, 'Discord Invite Detected!');
+                            const embed = new EmbedBuilder()
+                                .setDescription("A user named <@"+message.author.id+"> has sent a Discord Invite, their message has been deleted and the user has been muted.")
+                        	    .addFields({ name: 'Content', value: message.cleanContent, inline: false })
+                                .setColor(embedColours.negative)
+                                .setFooter({ text: 'User ID '+ message.author.id })
+                                .setTimestamp();
+                            client.channels.cache.get(logsID).send({ embeds: [embed] })
+                            message.delete();
+                        }
                     }
                 }
             }

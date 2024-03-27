@@ -1,4 +1,4 @@
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, Events } = require('discord.js');
 const { embedColours, ownerID, tempusIDs } = require('../config');
 const SQLite = require("better-sqlite3");
 const humanizeDuration = require('humanize-duration');
@@ -6,7 +6,7 @@ const sql = new SQLite('./bot.sqlite');
 const { nFormatter, givexp } = require("../functions.js");
 
 module.exports = {
-    name: 'messageCreate',
+    name: Events.MessageCreate,
     execute(message) {
         const client = message.client
         const user = message.author.user

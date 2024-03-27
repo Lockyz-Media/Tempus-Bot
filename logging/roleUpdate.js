@@ -1,8 +1,8 @@
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, Events } = require('discord.js');
 const { embedColours, ownerID, tempusIDs } = require('../config');
 
 module.exports = {
-	name: 'roleUpdate',
+	name: Events.GuildRoleUpdate,
 	execute(oldRole, newRole) {
 		const client = newRole.client
 		var tempusID = tempusIDs.guild

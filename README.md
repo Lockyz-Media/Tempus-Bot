@@ -1,5 +1,6 @@
-# Tempus Bot
+# Tempus Bot/bit-5.3
 Tempus bot is a bot created by Lockyz Media for the Pixelmon Tempus Discord Server.
+This branch is a complete rewrite of Tempus Bot using Bit 5.3!!!!
 
 ## Version Information
 - [Bit 5.3](https://github.com/Lockyz-Media/bit)

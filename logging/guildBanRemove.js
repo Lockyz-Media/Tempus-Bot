@@ -1,8 +1,8 @@
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, Events } = require('discord.js');
 const { embedColours, ownerID, tempusIDs } = require('../config');
 
 module.exports = {
-	name: 'guildBanRemove',
+	name: Events.GuildBanRemove,
 	execute(ban) {
 		const client = ban.client
 		var tempusID = tempusIDs.guild

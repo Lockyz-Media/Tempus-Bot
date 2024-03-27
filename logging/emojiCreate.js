@@ -1,10 +1,10 @@
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, Events } = require('discord.js');
 const { embedColours, ownerID, tempusIDs } = require('../config');
 const SQLite = require("better-sqlite3");
 const sql = new SQLite('./bot.sqlite');
 
 module.exports = {
-	name: 'emojiCreate',
+	name: Events.GuildEmojiCreate,
 	execute(emoji) {
         const client = emoji.client
 

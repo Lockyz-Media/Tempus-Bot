@@ -1,8 +1,8 @@
-const { EmbedBuilder } = require('discord.js');
+const { EmbedBuilder, Events } = require('discord.js');
 const { embedColours, ownerID, tempusIDs } = require('../config');
 
 module.exports = {
-	name: 'channelDelete',
+	name: Events.ChannelDelete,
 	execute(channel) {
 		const client = channel.client
 		var tempusID = tempusIDs.guild

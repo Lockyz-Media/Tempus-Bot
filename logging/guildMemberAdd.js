@@ -1,11 +1,11 @@
-const { EmbedBuilder, Message, AttachmentBuilder } = require('discord.js');
+const { EmbedBuilder, Message, AttachmentBuilder, Events } = require('discord.js');
 const { createCanvas, Image, GlobalFonts } = require('@napi-rs/canvas');
 const { readFile } = require('fs/promises');
 const { request } = require('undici');
 const { embedColours, ownerID, tempusIDs } = require('../config');
 
 module.exports = {
-	name: 'guildMemberAdd',
+	name: Events.GuildMemberAdd,
 	async execute(member) {
 		GlobalFonts.registerFromPath('./assets/font.ttf', 'Pokemon')
 		const client = member.client

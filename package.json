@@ -18,7 +18,7 @@
   "homepage": "https://github.com/Lockyz-Dev/Tempus-Bot#readme",
   "dependencies": {
     "better-sqlite3": "^7.6.2",
-    "@napi-rs/canvas": "^0.1.48",
+    "@napi-rs/canvas": "^0.1.51",
     "discord-giveaways": "^6.0.1",
     "discord.js": "^14.14.1",
     "discordjs-button-pagination": "github:spr1t3-0/discordjs-button-pagination#patch-1",

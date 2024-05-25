@@ -20,7 +20,7 @@
     "better-sqlite3": "^7.6.2",
     "@napi-rs/canvas": "^0.1.48",
     "discord-giveaways": "^6.0.1",
-    "discord.js": "^14.14.1",
+    "discord.js": "^14.15.1",
     "discordjs-button-pagination": "github:spr1t3-0/discordjs-button-pagination#patch-1",
     "moment": "^2.30.1",
     "humanize-duration": "^3.31.0",

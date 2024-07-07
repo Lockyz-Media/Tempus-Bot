@@ -15,15 +15,6 @@ module.exports = {
         var logsID = tempusIDs.logs
         var tempusID = tempusIDs.guild
 
-        if(message.channel.id === '875652753924448306') {
-            if(message.author.id === '835394949612175380') {
-                const embed = new EmbedBuilder()
-                    .setColor(embedColours.lockyzdev)
-                    .setDescription(message.cleanContent)
-                client.channels.cache.get(logsID).send({ content: "# New message from Lockyz Dev", embeds: [embed] })
-            }
-        }
-
         client.getUsSett = sql.prepare("SELECT * FROM userSettings WHERE userID = ?");
         client.setUsSett = sql.prepare("INSERT OR REPLACE INTO userSettings (userID, userAccess, levelNotifications, language) VALUES (@userID, @userAccess, @levelNotifications, @language);");
         let userset = client.getUsSett.get(message.author.id)
@@ -59,39 +50,6 @@ module.exports = {
                 }
             }
         }
-        
-        /*const row0 = ['http://', 'https://', 'http', 'www.']
-        const row1 = ['free', 'get', 'click', 'take', 'gift', '@everyone']
-        const row2 = ['nitro', 'diiscord', 'niitro', 'nitr', 'disc', 'diskord', 'disckord', 'taplink', 'discords', 'tinyurl', 'bit.ly']
-        const row3 = ['airdrop', 'steam', 'referral', 'epic', 'promotion', 'twitch', 'running out', 'first', '@everyone']
-        const row4 = ['https://discord.gift/', 'https://discord.com/billing/promotions/', 'https://promos.discord.gg/']
-
-        if(row0.some(word => message.content.toLowerCase().includes(word))) {
-            if(row1.some(word => message.content.toLowerCase().includes(word))) {
-                if(row2.some(word => message.content.toLowerCase().includes(word))) {
-                    if(row3.some(word => message.content.toLowerCase().includes(word))) {
-                        if(row4.some(word => message.content.toLowerCase().includes(word))) {
-                                    return;
-                        }
-                        const logEmbed = new EmbedBuilder()
-                            .setColor(embedColours.negative)
-                            if(message.member.kickable) {
-                                logEmbed.setDescription('A message by <@'+message.user.id+"> has content matching the Nitro Scam filter. The message has been deleted and the user timed out.")
-                            } else {
-                                logEmbed.setDescription('A message by <@'+message.user.id+"> has content matching the Nitro Scam filter. The message has been deleted however the user cannot be timed out.")
-                            }
-                            logEmbed.addFields({ name: 'Message Content', value: message.cleanContent})
-                            logEmbed.setTimestamp()
-                        client.channels.cache.get(logsID).send({ embeds: [logEmbed]})
-                        if(message.member.kickable) {
-                            message.member.timeout(60 * 60 * 1000, 'Automatic nitro scam detection')
-                        }
-                        message.delete()
-                        message.channel.send({ content: 'Message was detected as a `Nitro Scam` if this was done in error please contact a moderator.\n\nIf you have clicked a link within this message contact Discord Support RIGHT AWAY to avoid having your account stolen: <https://support.discord.com/hc/en-us/requests/new>' })
-                    }
-                }
-            }
-        }*/
         
 
         if(message.author.bot) {

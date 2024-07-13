@@ -58,8 +58,7 @@ module.exports = {
 
         if(message.guild.id === tempusID)
         {
-            // Make sure to go through, clean this up sometime in the future and comment TF outta it
-            if(message.member.roles.cache.some(role => role.id === '850774044512354335') || message.member.roles.cache.some(role => role.id === '516554905142558730') || message.member.roles.cache.some(role => role.id === '1039698571689209857') || message.member.roles.cache.some(role => role.id === '516553151936069659') || message.member.roles.cache.some(role => role.id === '516552949246328838') || message.member.roles.cache.some(role => role.id === '640063699624656937')) {
+            if(message.member.roles.cache.some(role => role.id === config.roleIDs.developer) || message.member.roles.cache.some(role => role.id === config.roleIDs.admin) || message.member.roles.cache.some(role => role.id === config.roleIDs.community_manager) || message.member.roles.cache.some(role => role.id === config.roleIDs.moderator) || message.member.roles.cache.some(role => role.id === config.roleIDs.owner) || message.member.roles.cache.some(role => role.id === config.roleIDs.the_wife)) {
 
             } else {
                 if(message.member.kickable) {

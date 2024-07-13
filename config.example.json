@@ -20,5 +20,21 @@
 	"ownerID": "OWNER ID",
 	"clientId": "CLIENT ID",
 	"guildId": "GUILD ID",
-	"token": "DISCORD TOKEN"
+	"token": "DISCORD TOKEN",
+	"rolIDs": {
+		"follower": "",
+		"vote_notif": "",
+		"sneak_peak": "",
+		"vj_health": "",
+		"tourney_notif": "",
+		"here_for_you": "",
+		"member": "",
+		"giveaway_manager": "",
+		"admin": "",
+		"mod": "",
+		"owner": "",
+		"developer": "",
+		"community_manager": "",
+		"the_wife": ""
+	}
 }

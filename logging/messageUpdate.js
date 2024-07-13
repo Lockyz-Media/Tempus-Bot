@@ -16,7 +16,7 @@ module.exports = {
     	if(newMessage.content == oldMessage.content) return;
     	if(!oldMessage.content) return;
     	if(!newMessage.content) return;
-		if(newMessage.channel.parent.id === '516557928220590096') {
+		if(newMessage.channel.parent.id === channel_ids.staff_category) {
 			return;
 		}
 

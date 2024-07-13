@@ -1,5 +1,5 @@
 const { EmbedBuilder, PermissionsBitField, SlashCommandBuilder, ChannelType } = require('discord.js');
-const { commandMetrics, logFunction } = require('../functions.js')
+const { logFunction } = require('../functions.js')
 const ms = require("ms");
 const locale = require('../locale/en.json')
 const SQLite = require("better-sqlite3");
@@ -333,7 +333,6 @@ module.exports = {
             )
         ),
 	async execute(interaction) {
-        commandMetrics(interaction.client, "giveaway", interaction.guild.id, interaction.user.id)
         const client = interaction.client
         const member = interaction.member
         var lan = 'en'

@@ -13,7 +13,7 @@ module.exports = {
 			return;
 		}
 
-		if(message.channel.parent.id === '516557928220590096') {
+		if(message.channel.parent.id === channel_ids.staff_category) {
 			return;
 		}
 

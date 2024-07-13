@@ -1,5 +1,4 @@
 const { EmbedBuilder, PermissionsBitField, SlashCommandBuilder } = require('discord.js')
-const { commandMetrics } = require('../functions.js')
 const SQLite = require("better-sqlite3");
 const sql = new SQLite('./bot.sqlite');
 
@@ -17,7 +16,6 @@ module.exports = {
 		})*/
         .setDMPermission(false),
 	async execute(interaction) {
-        commandMetrics(interaction.client, "serverinfo", interaction.guild.id, interaction.user.id)
         const client = interaction.client
         var lan = 'en'
         client.getUsSett = sql.prepare("SELECT * FROM userSettings WHERE userID = ?");

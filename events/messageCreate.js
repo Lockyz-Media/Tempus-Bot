@@ -20,7 +20,7 @@ module.exports = {
                 if(message.author.pending) {
                     return;
                 } else {
-                    message.member.roles.add('836632808490401842', 'User Verified')
+                    message.member.roles.add(role_ids.member, 'User Verified')
                     const embed = new EmbedBuilder()
                         .setDescription("A user named <@"+message.author.id+"> has gone through the user verification system.")
                         //.setTitle('Member Verified | '+message.member.username)

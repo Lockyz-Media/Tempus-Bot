@@ -1,5 +1,4 @@
 const { EmbedBuilder, PermissionsBitField, SlashCommandBuilder } = require('discord.js');
-const { commandMetrics } = require('../functions.js')
 const paginationEmbed = require('discordjs-button-pagination');
 const ms = require("ms");
 const Pokedex = require('pokedex-promise-v2');
@@ -121,7 +120,6 @@ module.exports = {
 		    )
         ),
 	async execute(interaction) {
-        commandMetrics(interaction.client, "pokemon", interaction.guild.id, interaction.user.id)
         const client = interaction.client
         const member = interaction.member
         var lan = 'en'

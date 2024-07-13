@@ -1,6 +1,5 @@
 const SQLite = require("better-sqlite3");
 const sql = new SQLite('./bot.sqlite');
-const sql1 = new SQLite('../globalDBs/commandMetrics.sqlite');
 const { EmbedBuilder } = require('discord.js');
 const config = require("./config");
 
@@ -36,45 +35,13 @@ module.exports = {
             .setColor(embedColour)
             .setTimestamp();
 
-        if(sendToLogChannel) {
-            if(sendToLogChannel === true) {
-                client.channels.cache.get(config.channel_ids.logs).send({ embeds: [embed] })
-            }
-        } else if(sendToLogChannel === false) { } else {
+        if(sendToLogChannel === true) {
             client.channels.cache.get(config.channel_ids.logs).send({ embeds: [embed] })
         }
 
-        if(sendToConsole) {
-            if(sendToConsole === true) {
-                console.log(logDescription.replace("{userID}", client.users.cache.get(userID).displayName).replace("{channelID}", client.channels.cache.get(channelID).name))
-            }
-        } else if(sendToConsole === false) { } else {
+        if(sendToConsole === true) {
             console.log(logDescription.replace("{userID}", client.users.cache.get(userID).displayName).replace("{channelID}", client.channels.cache.get(channelID).name))
         }
-    },
-    
-    disableFeature: function(featureName, allowAdmin) {
-        //Add logic to disable a feature using a "features" table
-    },
-    
-    disableCommand: function(commandName, allowAdmin, unpush) {
-        //Add logic to disable a command using a "commands" table
-    },
-    
-    enableFeature: function(featureName) {
-        //Add logic to enable a feature using a "features" table
-    },
-    
-    enableCommand: function(commandName, push) {
-        //Add logic to enable a command using a "commands" table
-    },
-    
-    queryFeature: function(featureName) {
-        //Add logic to check whether a feature is enabled/disabled
-    },
-    
-    queryCommand: function(commandName) {
-        //Add logic to check whether a command is enabled/disabled
     },
     
     givexp: function(client, xp, userid, guild_id) {
@@ -132,7 +99,6 @@ module.exports = {
     },
 
     takexp: function(client, xp, userid, guild_id) {
-        console.log("Taking points uwu")
         client.getScore = sql.prepare("SELECT * FROM scores WHERE user = ? AND guild = ?");
         client.setScore = sql.prepare("INSERT OR REPLACE INTO scores (id, user, guild, points, level) VALUES (@id, @user, @guild, @points, @level);");
 
@@ -153,7 +119,6 @@ module.exports = {
         score.level = curLevel;
 
         client.setScore.run(score);
-        console.log("points taken")
         return true;
     },
 
@@ -171,51 +136,5 @@ module.exports = {
 
         client.setScore.run(score);
         return true;
-    },
-
-    commandMetrics: function(client, commandName, serverID, userID) {
-        client.getGlobal = sql1.prepare("SELECT * FROM global WHERE name = ?");
-        client.setGlobal = sql1.prepare("INSERT OR REPLACE INTO global (name, uses, users, servers) VALUES (@name, @uses, @users, @servers);");
-
-        client.getGuild = sql1.prepare("SELECT * FROM perGuild WHERE name = ? AND serverid = ?")
-        client.setGuild = sql1.prepare("INSERT OR REPLACE INTO perGuild (id, name, serverid, uses) VALUES (@id, @name, @serverid, @uses);");
-
-        client.getUser = sql1.prepare("SELECT * FROM perUser WHERE name = ? AND user = ?")
-        client.setUser = sql1.prepare("INSERT OR REPLACE INTO peruser (id, name, user, uses) VALUES (@id, @name, @user, @uses);");
-
-        let global;
-        global = client.getGlobal.get(commandName)
-
-        let users;
-        users = client.getUser.get(commandName, userID)
-
-        let guilds;
-        guilds = client.getGuild.get(commandName, serverID)
-
-        if(!global) {
-            global = { name: commandName, uses: 1, servers: 0, users: 0 }
-        } else {
-            global.uses += 1;
-        }
-
-        if(!guilds) {
-            guilds = { id: `${serverID}-${commandName}`, name: commandName, serverid: serverID, uses: 1 }
-            global.servers += 1;
-            client.setGuild.run(guilds);
-        } else {
-            guilds.uses += 1;
-            client.setGuild.run(guilds);
-        }
-
-        if(!users) {
-            users = { id: `${userID}-${commandName}`, name: commandName, user: userID, uses: 1 }
-            global.users += 1;
-            client.setUser.run(users);
-        } else {
-            users.uses += 1;
-            client.setUser.run(users);
-        }
-
-        client.setGlobal.run(global);
     }
 };

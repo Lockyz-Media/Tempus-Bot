@@ -1,4 +1,3 @@
-const { commandMetrics } = require('../functions.js')
 const { SlashCommandBuilder, EmbedBuilder, PermissionsBitFieldBitField } = require('discord.js')
 const locale = require('../locale/en.json')
 const SQLite = require("better-sqlite3");
@@ -40,7 +39,6 @@ module.exports = {
 	async execute(interaction) {
         const client = interaction.client
         const question = interaction.options.getString('question');
-        commandMetrics(interaction.client, "tempus-faq", interaction.guild.id, interaction.user.id)
 
         if(question === 'release_date') {
             const embed = new EmbedBuilder()

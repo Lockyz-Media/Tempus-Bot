@@ -1,5 +1,4 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, Message, ButtonStyle, SlashCommandBuilder } = require('discord.js')
-const { commandMetrics } = require('../functions.js')
 const { embed_colours, owner_id } = require('../config');
 const SQLite = require("better-sqlite3");
 const messageCreate = require('../events/messageCreate');
@@ -20,7 +19,6 @@ module.exports = {
 		})*/
 		.setDMPermission(false),
 	async execute(interaction) {
-		//commandMetrics(interaction.client, "leaderboard", interaction.guild.id, interaction.user.id)
         const client = interaction.client
 
         const table = sql.prepare("SELECT count(*) FROM sqlite_master WHERE type='table' AND name = 'scores';").get();

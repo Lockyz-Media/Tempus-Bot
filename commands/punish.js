@@ -1,5 +1,5 @@
 const { EmbedBuilder, PermissionsBitField, SlashCommandBuilder } = require('discord.js')
-const { commandMetrics, logFunction } = require('../functions.js')
+const { logFunction } = require('../functions.js')
 const locale = require('../locale/en.json')
 const SQLite = require("better-sqlite3");
 const sql = new SQLite('./bot.sqlite');
@@ -387,7 +387,6 @@ module.exports = {
             )
         ),
 	async execute(interaction) {
-        commandMetrics(interaction.client, "punish", interaction.guild.id, interaction.user.id)
         const client = interaction.client
         var lan = 'en'
         client.getUsSett = sql.prepare("SELECT * FROM userSettings WHERE userID = ?");

@@ -1,4 +1,3 @@
-const { commandMetrics } = require('../functions.js')
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js')
 const locale = require('../locale/en.json')
 const SQLite = require("better-sqlite3");
@@ -59,7 +58,6 @@ module.exports = {
                 lan = userset.language;
             }
         }
-        commandMetrics(interaction.client, "8ball", interaction.guild.id, interaction.user.id)
         const locale = require('../locale/'+lan+'.json')
 
         var roll = [

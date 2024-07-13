@@ -1,5 +1,4 @@
 const { PermissionsBitField, EmbedBuilder, InviteGuild, ModalBuilder, ActionRowBuilder, TextInputBuilder, TextInputStyle, SlashCommandBuilder } = require('discord.js')
-const { commandMetrics } = require('../functions.js')
 const SQLite = require("better-sqlite3");
 const sql = new SQLite('./bot.sqlite');
 
@@ -96,7 +95,6 @@ module.exports = {
             )
         ),
 	async execute(interaction) {
-        commandMetrics(interaction.client, "profile", interaction.guild.id, interaction.user.id)
         const client = interaction.client
 
         if(interaction.options.getSubcommand() === 'messages') {

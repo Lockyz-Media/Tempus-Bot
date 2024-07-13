@@ -1,5 +1,5 @@
 const { EmbedBuilder, Permissions, SlashCommandBuilder } = require('discord.js');
-const { givexp, takexp, ranNum, commandMetrics } = require("../functions.js")
+const { givexp, takexp, ranNum } = require("../functions.js")
 const ms = require("ms");
 
 module.exports = {
@@ -65,7 +65,6 @@ module.exports = {
             )
         ),
 	async execute(interaction) {
-	    commandMetrics(interaction.client, "wtp", interaction.guild.id, interaction.user.id)
         //await interaction.deferReply();
         const client = interaction.client
         const member = interaction.member

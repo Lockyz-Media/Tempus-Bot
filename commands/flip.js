@@ -1,4 +1,3 @@
-const { commandMetrics } = require('../functions.js')
 const { EmbedBuilder, SlashCommandBuilder } = require('discord.js')
 const locale = require('../locale/en.json')
 const SQLite = require("better-sqlite3");
@@ -18,7 +17,6 @@ module.exports = {
 		})*/
         .setDMPermission(false),
 	async execute(interaction) {
-        commandMetrics(interaction.client, "flip", interaction.guild.id, interaction.user.id)
         const client = interaction.client
         var lan = 'en'
         client.getUsSett = sql.prepare("SELECT * FROM userSettings WHERE userID = ?");

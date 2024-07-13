@@ -1,5 +1,4 @@
 const { EmbedBuilder, PermissionsBitField, version: discordVersion, SlashCommandBuilder } = require('discord.js')
-const { commandMetrics } = require('../functions.js')
 const moment = require('moment');
 require('moment-duration-format');
 const SQLite = require("better-sqlite3");
@@ -19,7 +18,6 @@ module.exports = {
 		})*/
         .setDMPermission(false),
 	async execute(interaction) {
-        commandMetrics(interaction.client, "info", interaction.guild.id, interaction.user.id)
         const client = interaction.client
         
         var d = new Date();

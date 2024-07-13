@@ -1,5 +1,4 @@
 const { PermissionsBitField, EmbedBuilder, InviteGuild, ActionRowBuilder, ModalBuilder, TextInputBuilder, TextInputStyle, SlashCommandBuilder } = require('discord.js')
-const { commandMetrics } = require('../functions.js')
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -16,7 +15,6 @@ module.exports = {
         .setDMPermission(false),
 
 	async execute(interaction) {
-        commandMetrics(interaction.client, "usersettings", interaction.guild.id, interaction.user.id)
         const client = interaction.client
 
         const modal = new ModalBuilder()

@@ -1,5 +1,4 @@
 const { MessageEmbed, ActionRowBuilder, ButtonBuilder, Message, ButtonStyle, SlashCommandBuilder } = require('discord.js')
-const { commandMetrics } = require('../functions.js')
 const { owner_id } = require('../config');
 const owospeak = require("owospeak");
 const SQLite = require("better-sqlite3");
@@ -32,7 +31,6 @@ module.exports = {
             .setRequired(true)
         ),
 	async execute(interaction) {
-        commandMetrics(interaction.client, "owoify", interaction.guild.id, interaction.user.id)
         const client = interaction.client
         var lan = 'en'
         client.getUsSett = sql.prepare("SELECT * FROM userSettings WHERE userID = ?");

@@ -1,5 +1,5 @@
 const { EmbedBuilder, Events } = require('discord.js');
-const { embedColor, ownerID, tempusIDs } = require('../config');
+const { owner_id, guild_id, role_menu_ids } = require('../config');
 const SQLite = require("better-sqlite3");
 const messageUpdate = require('../logging/messageUpdate');
 const sql = new SQLite('./bot.sqlite');
@@ -8,7 +8,7 @@ module.exports = {
 	name: Events.InteractionCreate,
 	async execute(interaction) {
 		const client = interaction.client
-		const tempusID = tempusIDs.guild
+		const tempusID = guild_id
         const command = interaction.client.commands.get(interaction.commandName);
 
         client.getUsSett = sql.prepare("SELECT * FROM userSettings WHERE userID = ?");
@@ -68,61 +68,61 @@ module.exports = {
                 let member = interaction.guild.members.cache.get(interaction.user.id)
 
                 if(interaction.values.includes('follow')) {
-                    if(member.roles.cache.has('642165628395847680')) {
-                        member.roles.remove('642165628395847680')
+                    if(member.roles.cache.has(role_menu_ids.follower)) {
+                        member.roles.remove(role_menu_ids.follower)
                         interaction.reply({ content: "You no longer have the Follower role", ephemeral: true })
                     } else {
-                        member.roles.add('642165628395847680')
+                        member.roles.add(role_menu_ids.follower)
                         interaction.reply({ content: "You now have the Follower role", ephemeral: true })
                     }
                 }
 
             	if(interaction.values.includes('vote')) {
-                    if(member.roles.cache.has('742626885464227942')) {
-                        member.roles.remove('742626885464227942')
+                    if(member.roles.cache.has(role_menu_ids.vote_notif)) {
+                        member.roles.remove(role_menu_ids.vote_notif)
                         interaction.reply({ content: "You no longer have the Vote role", ephemeral: true })
                     } else {
-                        member.roles.add('742626885464227942')
+                        member.roles.add(role_menu_ids.vote_notif)
                         interaction.reply({ content: "You now have the Vote role", ephemeral: true })
                     }
                 }
 
                 if(interaction.values.includes('sneak_peek')) {
-                	if(member.roles.cache.has('742627342547025921')) {
-                        member.roles.remove('742627342547025921')
+                	if(member.roles.cache.has(role_menu_ids.sneak_peak)) {
+                        member.roles.remove(role_menu_ids.sneak_peak)
                         interaction.reply({ content: "You no longer have the Sneak Peak role", ephemeral: true })
                     } else {
-                        member.roles.add('742627342547025921')
+                        member.roles.add(role_menu_ids.sneak_peak)
                         interaction.reply({ content: "You now have the Sneak Peak role", ephemeral: true })
                     }
                 }
 
                 if(interaction.values.includes('vj_health')) {
-                    if(member.roles.cache.has('826845000506933268')) {
-                        member.roles.remove('826845000506933268')
+                    if(member.roles.cache.has(role_menu_ids.vj_health)) {
+                        member.roles.remove(role_menu_ids.vj_health)
                         interaction.reply({ content: "You no longer have the Health role", ephemeral: true })
                     } else {
-                        member.roles.add('826845000506933268')
+                        member.roles.add(role_menu_ids.vj_health)
                         interaction.reply({ content: "You now have the Health role", ephemeral: true })
                     }
                 }
 				
             	if(interaction.values.includes('tourney')) {
-                    if(member.roles.cache.has('1063225756735508590')) {
-                        member.roles.remove('1063225756735508590')
+                    if(member.roles.cache.has(role_menu_ids.tourney_notif)) {
+                        member.roles.remove(role_menu_ids.tourney_notif)
                         interaction.reply({ content: "You no longer have the Tournament role", ephemeral: true })
                 	} else {
-                        member.roles.add('1063225756735508590')
+                        member.roles.add(role_menu_ids.tourney_notif)
                         interaction.reply({ content: "You now have the Tournament role", ephemeral: true })
                     }
                 }
 				
             	if(interaction.values.includes('hereForYou')) {
-                    if(member.roles.cache.has('774254558883872811')) {
-                        member.roles.remove('774254558883872811')
+                    if(member.roles.cache.has(role_menu_ids.here_for_you)) {
+                        member.roles.remove(role_menu_ids.here_for_you)
                         interaction.reply({ content: "You no longer have the Here for you role", ephemeral: true })
                     } else {
-                        member.roles.add('774254558883872811')
+                        member.roles.add(role_menu_ids.here_for_you)
                         interaction.reply({ content: "You now have the Here for you role", ephemeral: true })
                     }
                 }

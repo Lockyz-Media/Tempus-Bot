@@ -1,12 +1,12 @@
 const { EmbedBuilder, Events } = require('discord.js');
-const { embedColor, ownerID, tempusIDs, embedColours } = require('../config');
+const { owner_id, channel_ids, guild_id, embed_colours } = require('../config');
 
 module.exports = {
 	name: Events.GuildRoleDelete,
 	execute(role) {
 		const client = role.client
-		var tempusID = tempusIDs.guild
-		var logsID = tempusIDs.logs
+		var tempusID = guild_id
+		var logsID = channel_ids.logs
 
 		if(role.guild.id !== tempusID) {
 			return;
@@ -17,7 +17,7 @@ module.exports = {
 			if(role.color) {
 				embed.setColor(role.color)
 			} else {
-				embed.setColor(embedColours.negative)
+				embed.setColor(embed_colours.negative)
 			}
 			embed.setFooter({ text: 'Role ID '+ role.id })
 			embed.setTimestamp();

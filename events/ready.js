@@ -1,5 +1,5 @@
 const { ActivityType, Events } = require('discord.js');
-const { embedColours, ownerID, tempusIDs, activity } = require('../config');
+const { embed_colours, owner_id, channel_ids, activity } = require('../config');
 
 module.exports = {
 	name: Events.ClientReady,
@@ -40,7 +40,6 @@ module.exports = {
 			}],
 			status: activityStatus
 		})
-		var logsID = tempusIDs.logs
 		console.log("Custom Status Set")
 		console.log("🟢 Bit Core: 4.0.0m Online! Logged in as "+client.user.tag)
 		console.log('==== Have a good day! ====');

@@ -1,12 +1,12 @@
 const { EmbedBuilder, Events } = require('discord.js');
-const { embedColours, ownerID, tempusIDs } = require('../config');
+const { embed_colours, owner_id, channel_ids, guild_id } = require('../config');
 
 module.exports = {
 	name: Events.ChannelCreate,
 	execute(channel) {
 		const client = channel.client
-		var logsID = tempusIDs.logs
-		var tempusID = tempusIDs.guild
+		var logsID = channel_ids.logs
+		var tempusID = guild_id
 		if(channel.guild.id !== tempusID) {
 			return;
 		}
@@ -61,7 +61,7 @@ module.exports = {
 		}
 		
 		const embed = new EmbedBuilder()
-			.setColor(embedColours.positive)
+			.setColor(embed_colours.positive)
 			if(isThread) {
 				embed.setDescription("A thread named "+channel.name+categoryText)
 			} else {

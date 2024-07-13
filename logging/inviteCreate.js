@@ -1,5 +1,5 @@
 const { EmbedBuilder, Events } = require('discord.js');
-const { embedColours, ownerID, tempusIDs } = require('../config');
+const { embed_colours, owner_id, channel_ids } = require('../config');
 const SQLite = require("better-sqlite3");
 const sql = new SQLite('./bot.sqlite');
 
@@ -8,7 +8,7 @@ module.exports = {
 	execute(invite) {
         const client = invite.client
 
-		var logsID = tempusIDs.logs
+		var logsID = channel_ids.logs
 		var currentDate = Date.now()
 		currentDate = currentDate/1000
 		var inviteEnd
@@ -33,7 +33,7 @@ module.exports = {
 		}
 
 		const embed = new EmbedBuilder()
-			.setColor(embedColours.positive)
+			.setColor(embed_colours.positive)
 			if(invite.maxAge === 0) {
 				embed.setDescription("An infinite invite was created by "+inviter+useString+"\nhttps://discord.gg/"+invite.code);
 			} else {

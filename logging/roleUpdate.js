@@ -1,12 +1,12 @@
 const { EmbedBuilder, Events } = require('discord.js');
-const { embedColours, ownerID, tempusIDs } = require('../config');
+const { embed_colours, owner_id, channel_ids, guild_id } = require('../config');
 
 module.exports = {
 	name: Events.GuildRoleUpdate,
 	execute(oldRole, newRole) {
 		const client = newRole.client
-		var tempusID = tempusIDs.guild
-		var logsID = tempusIDs.logs
+		var tempusID = guild_id
+		var logsID = channel_ids.logs
 		var ncolor = newRole.color
 		var ocolor = oldRole.color
 		var nhoist = newRole.hoist
@@ -36,10 +36,10 @@ module.exports = {
 						if(ncolor) {
 							embed.setColor(ncolor)
 						} else {
-							embed.setColor(embedColours.neutral)
+							embed.setColor(embed_colours.neutral)
 						}
 					} else {
-						embed.setColor(embedColours.neutral)
+						embed.setColor(embed_colours.neutral)
 					}
 					if(nhoist !== ohoist) {
 						if(!nhoist) {

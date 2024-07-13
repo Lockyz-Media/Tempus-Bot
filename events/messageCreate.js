@@ -1,5 +1,5 @@
 const { EmbedBuilder, Events } = require('discord.js');
-const { embedColours, ownerID, tempusIDs } = require('../config');
+const { embed_colours, owner_id, channel_ids, guild_id, role_ids } = require('../config');
 const SQLite = require("better-sqlite3");
 const humanizeDuration = require('humanize-duration');
 const sql = new SQLite('./bot.sqlite');
@@ -12,8 +12,8 @@ module.exports = {
         const user = message.author.user
         const member = message.member
         const guild = message.guild
-        var logsID = tempusIDs.logs
-        var tempusID = tempusIDs.guild
+        var logsID = channel_ids.logs
+        var tempusID = guild_id
 
         client.getUsSett = sql.prepare("SELECT * FROM userSettings WHERE userID = ?");
         client.setUsSett = sql.prepare("INSERT OR REPLACE INTO userSettings (userID, userAccess, levelNotifications, language) VALUES (@userID, @userAccess, @levelNotifications, @language);");
@@ -43,7 +43,7 @@ module.exports = {
                     const embed = new EmbedBuilder()
                         .setDescription("A user named <@"+message.author.id+"> has gone through the user verification system.")
                         //.setTitle('Member Verified | '+message.member.username)
-                        .setColor(embedColours.positive)
+                        .setColor(embed_colours.positive)
                         .setFooter({ text: 'User ID '+ message.author.id })
                         .setTimestamp();
                     client.channels.cache.get(logsID).send({ embeds: [embed] })
@@ -58,7 +58,7 @@ module.exports = {
 
         if(message.guild.id === tempusID)
         {
-            if(message.member.roles.cache.some(role => role.id === config.roleIDs.developer) || message.member.roles.cache.some(role => role.id === config.roleIDs.admin) || message.member.roles.cache.some(role => role.id === config.roleIDs.community_manager) || message.member.roles.cache.some(role => role.id === config.roleIDs.moderator) || message.member.roles.cache.some(role => role.id === config.roleIDs.owner) || message.member.roles.cache.some(role => role.id === config.roleIDs.the_wife)) {
+            if(message.member.roles.cache.some(role => role.id === role_ids.developer) || message.member.roles.cache.some(role => role.id === role_ids.admin) || message.member.roles.cache.some(role => role.id === role_ids.community_manager) || message.member.roles.cache.some(role => role.id === role_ids.moderator) || message.member.roles.cache.some(role => role.id === role_ids.owner) || message.member.roles.cache.some(role => role.id === role_ids.the_wife)) {
 
             } else {
                 if(message.member.kickable) {
@@ -71,7 +71,7 @@ module.exports = {
                                         const embed = new EmbedBuilder()
                                             .setDescription("A user named <@"+message.author.id+"> has been detected as a spam bot, their message deleted and the user banned. They have passed 5/5 checks for a spam bot!")
                         	                .addFields({ name: 'Content', value: message.cleanContent, inline: false })
-                                            .setColor(embedColours.negative)
+                                            .setColor(embed_colours.negative)
                                             .setFooter({ text: 'User ID '+ message.author.id })
                                             .setTimestamp();
                                         client.channels.cache.get(logsID).send({ embeds: [embed] })
@@ -81,7 +81,7 @@ module.exports = {
                                         const embed = new EmbedBuilder()
                                             .setDescription("A user named <@"+message.author.id+"> has sent a Discord Invite or could be a spam bot, their message has been deleted and the user has been muted. They have passed 4/5 checks for a spam bot!")
                                             .addFields({ name: 'Content', value: message.cleanContent, inline: false })
-                                            .setColor(embedColours.negative)
+                                            .setColor(embed_colours.negative)
                                             .setFooter({ text: 'User ID '+ message.author.id })
                                             .setTimestamp();
                                         client.channels.cache.get(logsID).send({ embeds: [embed] })
@@ -92,7 +92,7 @@ module.exports = {
                                     const embed = new EmbedBuilder()
                                         .setDescription("A user named <@"+message.author.id+"> has sent a Discord Invite or could be a spam bot, their message has been deleted and the user has been muted. They have passed 3/5 checks for a spam bot!")
                         	            .addFields({ name: 'Content', value: message.cleanContent, inline: false })
-                                        .setColor(embedColours.negative)
+                                        .setColor(embed_colours.negative)
                                         .setFooter({ text: 'User ID '+ message.author.id })
                                         .setTimestamp();
                                     client.channels.cache.get(logsID).send({ embeds: [embed] })
@@ -103,7 +103,7 @@ module.exports = {
                                 const embed = new EmbedBuilder()
                                     .setDescription("A user named <@"+message.author.id+"> has sent a Discord Invite or could be a spam bot, their message has been deleted and the user has been muted. They have passed 2/5 checks for a spam bot!")
                         	        .addFields({ name: 'Content', value: message.cleanContent, inline: false })
-                                    .setColor(embedColours.negative)
+                                    .setColor(embed_colours.negative)
                                     .setFooter({ text: 'User ID '+ message.author.id })
                                     .setTimestamp();
                                 client.channels.cache.get(logsID).send({ embeds: [embed] })
@@ -114,7 +114,7 @@ module.exports = {
                             const embed = new EmbedBuilder()
                                 .setDescription("A user named <@"+message.author.id+"> has sent a Discord Invite, their message has been deleted and the user has been muted.")
                         	    .addFields({ name: 'Content', value: message.cleanContent, inline: false })
-                                .setColor(embedColours.negative)
+                                .setColor(embed_colours.negative)
                                 .setFooter({ text: 'User ID '+ message.author.id })
                                 .setTimestamp();
                             client.channels.cache.get(logsID).send({ embeds: [embed] })
@@ -151,7 +151,7 @@ module.exports = {
                     const embed = new EmbedBuilder()
                     //.setTitle('🎉 LEVEL UP 🎉')
                     .setDescription('🎉🎉 Congratulations **'+message.member.username+'**, you\'ve earnt a total of **'+nFormatter(score.points, 2)+'**, which is enough for **Level '+nFormatter(curLevel, 0)+'** 🎉🎉')
-                    .setColor(embedColours.positive)
+                    .setColor(embed_colours.positive)
                     //.setFooter({ text: 'This message can be turned off with the `/usersettings` command' })
                     .setTimestamp()
                 message.channel.send({ embeds: [embed] });

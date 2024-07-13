@@ -21,14 +21,14 @@ module.exports = {
 
         var logText = logDescription.replace("{userID}", "<@"+userID+">").replace("{channelID}", "<#"+channelID+">")
 
-        var embedColour = config.embedColours.neutral
+        var embedColour = config.embed_colours.neutral
 
         if(loogType === "positive") {
-            embedColour = config.embedColours.positive
+            embedColour = config.embed_colours.positive
         } else if(loogType === "negative") {
-            embedColour = config.embedColours.negative
+            embedColour = config.embed_colours.negative
         } else {
-            embedColour = config.embedColours.neutral
+            embedColour = config.embed_colours.neutral
         }
 
         const embed = new EmbedBuilder()
@@ -38,10 +38,10 @@ module.exports = {
 
         if(sendToLogChannel) {
             if(sendToLogChannel === true) {
-                client.channels.cache.get(config.tempusIDs.logs).send({ embeds: [embed] })
+                client.channels.cache.get(config.channel_ids.logs).send({ embeds: [embed] })
             }
         } else if(sendToLogChannel === false) { } else {
-            client.channels.cache.get(config.tempusIDs.logs).send({ embeds: [embed] })
+            client.channels.cache.get(config.channel_ids.logs).send({ embeds: [embed] })
         }
 
         if(sendToConsole) {
@@ -77,15 +77,15 @@ module.exports = {
         //Add logic to check whether a command is enabled/disabled
     },
     
-    givexp: function(client, xp, userid, guildid) {
+    givexp: function(client, xp, userid, guild_id) {
         client.getScore = sql.prepare("SELECT * FROM scores WHERE user = ? AND guild = ?");
         client.setScore = sql.prepare("INSERT OR REPLACE INTO scores (id, user, guild, points, level) VALUES (@id, @user, @guild, @points, @level);");
 
         let score;
-        score = client.getScore.get(userid, guildid);
+        score = client.getScore.get(userid, guild_id);
 
         if (!score) {
-            score = { id: `${guildid}-${userid}`, user: userid, guild: guildid, points: 1, level: 0};
+            score = { id: `${guild_id}-${userid}`, user: userid, guild: guild_id, points: 1, level: 0};
         }
 
         score.points += xp;
@@ -131,16 +131,16 @@ module.exports = {
           return item ? (num / item.value).toFixed(digits).replace(rx, "$1") + item.symbol : "0";
     },
 
-    takexp: function(client, xp, userid, guildid) {
+    takexp: function(client, xp, userid, guild_id) {
         console.log("Taking points uwu")
         client.getScore = sql.prepare("SELECT * FROM scores WHERE user = ? AND guild = ?");
         client.setScore = sql.prepare("INSERT OR REPLACE INTO scores (id, user, guild, points, level) VALUES (@id, @user, @guild, @points, @level);");
 
         let score;
-        score = client.getScore.get(userid, guildid);
+        score = client.getScore.get(userid, guild_id);
 
         if (!score) {
-            score = { id: `${guildid}-${userid}`, user: userid, guild: guildid, points: 1, level: 0};
+            score = { id: `${guild_id}-${userid}`, user: userid, guild: guild_id, points: 1, level: 0};
         }
 
         if(score.points < xp) {
@@ -157,12 +157,12 @@ module.exports = {
         return true;
     },
 
-    resetxp: function(client, userid, guildid) {
+    resetxp: function(client, userid, guild_id) {
         client.getScore = sql.prepare("SELECT * FROM scores WHERE user = ? AND guild = ?");
         client.setScore = sql.prepare("INSERT OR REPLACE INTO scores (id, user, guild, points, level) VALUES (@id, @user, @guild, @points, @level);");
 
         let score;
-        score = client.getScore.get(userid, guildid);
+        score = client.getScore.get(userid, guild_id);
 
         score.points = 0;
 

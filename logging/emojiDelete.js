@@ -1,5 +1,5 @@
 const { EmbedBuilder, Events } = require('discord.js');
-const { embedColours, ownerID, tempusIDs } = require('../config');
+const { embed_colours, owner_id, channel_ids } = require('../config');
 const SQLite = require("better-sqlite3");
 const sql = new SQLite('./bot.sqlite');
 
@@ -7,10 +7,10 @@ module.exports = {
 	name: Events.GuildEmojiDelete,
 	execute(emoji) {
         const client = emoji.client
-		var logsID = tempusIDs.logs
+		var logsID = channel_ids.logs
 
 		const embed = new EmbedBuilder()
-			.setColor(embedColours.negative)
+			.setColor(embed_colours.negative)
 			.setDescription("An Emoji named "+emoji.name+" was deleted.")
 			.setFooter({ text: 'Emoji ID '+emoji.id })
 			.setTimestamp();

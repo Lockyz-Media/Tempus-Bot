@@ -1,12 +1,12 @@
 const { EmbedBuilder, Events } = require('discord.js');
-const { embedColours, ownerID, tempusIDs } = require('../config');
+const { embed_colours, owner_id, channel_ids, guild_id } = require('../config');
 
 module.exports = {
 	name: Events.ChannelUpdate,
 	execute(oldChannel, newChannel) {
 		const client = newChannel.client
-		var tempusID = tempusIDs.guild
-		var logsID = tempusIDs.logs
+		var tempusID = guild_id
+		var logsID = channel_ids.logs
 		var nname = newChannel.name
 		var oname = oldChannel.name
 		var nparent
@@ -75,7 +75,7 @@ module.exports = {
 
 		if( nname !== oname || nparent !== oparent || ntype !== otype ) {
 			const embed = new EmbedBuilder()
-				.setColor(embedColours.neutral)
+				.setColor(embed_colours.neutral)
 				.setDescription('A channel '+oldChannel.name+' of type '+oldChannel.type+categoryText)
 
 			if(newChannel.name) {

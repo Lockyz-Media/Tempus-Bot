@@ -1,12 +1,12 @@
 const { EmbedBuilder, Events } = require('discord.js');
-const { embedColours, ownerID, tempusIDs } = require('../config');
+const { embed_colours, owner_id, channel_ids, guild_id } = require('../config');
 
 module.exports = {
 	name: Events.ChannelDelete,
 	execute(channel) {
 		const client = channel.client
-		var tempusID = tempusIDs.guild
-		var logsID = tempusIDs.logs
+		var tempusID = guild_id
+		var logsID = channel_ids.logs
 
 		const lookup = [
 			{ value: 0, name: "Guild Text" },
@@ -62,7 +62,7 @@ module.exports = {
 		}
 
 		const embed = new EmbedBuilder()
-			.setColor(embedColours.negative)
+			.setColor(embed_colours.negative)
 			if(isThread) {
 				embed.setDescription("A thread named "+channel.name)
 			} else {

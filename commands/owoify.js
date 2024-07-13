@@ -1,6 +1,6 @@
 const { MessageEmbed, ActionRowBuilder, ButtonBuilder, Message, ButtonStyle, SlashCommandBuilder } = require('discord.js')
 const { commandMetrics } = require('../functions.js')
-const { embedColor, ownerID, tempusIDs } = require('../config');
+const { owner_id } = require('../config');
 const owospeak = require("owospeak");
 const SQLite = require("better-sqlite3");
 const sql = new SQLite('./bot.sqlite');

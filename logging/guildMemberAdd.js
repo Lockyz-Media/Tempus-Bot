@@ -2,7 +2,7 @@ const { EmbedBuilder, Message, AttachmentBuilder, Events } = require('discord.js
 const { createCanvas, Image, GlobalFonts } = require('@napi-rs/canvas');
 const { readFile } = require('fs/promises');
 const { request } = require('undici');
-const { embedColours, ownerID, tempusIDs } = require('../config');
+const { embed_colours, owner_id, channel_ids, guild_id } = require('../config');
 
 module.exports = {
 	name: Events.GuildMemberAdd,
@@ -10,9 +10,9 @@ module.exports = {
 		GlobalFonts.registerFromPath('./assets/font.ttf', 'Pokemon')
 		const client = member.client
 		const user = member.user
-		var tempusID = tempusIDs.guild
-		var logsID = tempusIDs.logs
-		var welcomeID = '640058237043081226'
+		var tempusID = guild_id
+		var logsID = channel_ids.logs
+		var welcomeID = channel_ids.welcome
 
 		const applyText = (canvas, text) => {
 			const context = canvas.getContext('2d');
@@ -110,7 +110,7 @@ module.exports = {
 		const attachment = new AttachmentBuilder(canvas.toBuffer('image/png'), { name: 'profile-image.png' });
 
 		const embed = new EmbedBuilder()
-			.setColor(embedColours.positive)
+			.setColor(embed_colours.positive)
 			.setDescription("A user named <@"+user.id+"> joined the server.")
 			.setFooter({ text: 'User ID '+ user.id })
 			.setTimestamp();

@@ -1,13 +1,13 @@
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, Message, ButtonStyle, Events } = require('discord.js');
-const { embedColours, ownerID, tempusIDs } = require('../config');
+const { embed_colours, owner_id, channel_ids, guild_id } = require('../config');
 
 module.exports = {
 	name: Events.MessageUpdate,
 	execute(oldMessage, newMessage) {
 		const client = newMessage.client
 		const user = newMessage.user
-		var tempusID = tempusIDs.guild
-		var logsID = tempusIDs.logs
+		var tempusID = guild_id
+		var logsID = channel_ids.logs
 
 		if(newMessage.guild.id != tempusID) {
 			return;
@@ -28,7 +28,7 @@ module.exports = {
 					.setURL(newMessage.url)
 			)
 		const embed0 = new EmbedBuilder()
-			.setColor(embedColours.neutral)
+			.setColor(embed_colours.neutral)
 			.setDescription("A message by <@"+oldMessage.author.id+"> in <#"+newMessage.channel.id+"> was edited.")
 			if(newMessage.cleanContent.length > 1024) {
 				embed0.addFields({ name: 'Content', value: 'Content is over 1024 lines, it\'s in a new embed'})
@@ -42,7 +42,7 @@ module.exports = {
 		if(newMessage.cleanContent.length > 1024) {
 			const embed2 = new EmbedBuilder()
 				.setTitle("Message Content")
-				.setColor(embedColours.neutral)
+				.setColor(embed_colours.neutral)
 				.setDescription(newMessage.cleanContent)
 			client.channels.cache.get(logsID).send({ embeds: [embed2] })
 		}

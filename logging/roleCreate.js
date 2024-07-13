@@ -1,12 +1,12 @@
 const { EmbedBuilder, Events } = require('discord.js');
-const { embedColours, ownerID, tempusIDs } = require('../config');
+const { embed_colours, owner_id, channel_ids, guild_id } = require('../config');
 
 module.exports = {
 	name: Events.GuildRoleCreate,
 	execute(role) {
 		const client = role.client
-		var tempusID = tempusIDs.guild
-		var logsID = tempusIDs.logs
+		var tempusID = guild_id
+		var logsID = channel_ids.logs
 
 		if(role.guild.id !== tempusID) {
 			return;
@@ -17,7 +17,7 @@ module.exports = {
 			if(role.color) {
 				embed.setColor(role.color)
 			} else {
-				embed.setColor(embedColours.positive)
+				embed.setColor(embed_colours.positive)
 			}
 			embed.setFooter({ text: 'Role ID '+ role.id})
 			embed.setTimestamp();

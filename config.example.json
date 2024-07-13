@@ -1,15 +1,10 @@
 {
-	"embedColor": "#86C1FD",
-	"embedColours": {
+	"embed_colours": {
 		"positive": "#00FF1C",
 		"negative": "#FF0000",
 		"neutral": "#9013FE",
 		"main": "#86C1FD",
 		"secondary": "#50E3C2"
-	},
-	"tempusIDs": {
-		"logs": "LOGGING ID",
-		"guild": "GUILD ID"
 	},
 	"activity": {
 		"type": "custom",
@@ -17,17 +12,19 @@
 		"state": "Discord has given me too much power",
 		"status": "online"
 	},
-	"ownerID": "OWNER ID",
-	"clientId": "CLIENT ID",
-	"guildId": "GUILD ID",
+	"owner_id": "OWNER ID",
+	"client_id": "CLIENT ID",
+	"guild_id": "GUILD ID",
 	"token": "DISCORD TOKEN",
-	"rolIDs": {
+	"role_menu_ids": {
 		"follower": "",
 		"vote_notif": "",
 		"sneak_peak": "",
 		"vj_health": "",
 		"tourney_notif": "",
-		"here_for_you": "",
+		"here_for_you": ""
+	},
+	"role_ids": {
 		"member": "",
 		"giveaway_manager": "",
 		"admin": "",
@@ -36,5 +33,11 @@
 		"developer": "",
 		"community_manager": "",
 		"the_wife": ""
+	},
+	"channel_ids": {
+		"custom_ban_reasons": "",
+		"staff_category": "",
+		"logs": "",
+		"welcome": ""
 	}
 }

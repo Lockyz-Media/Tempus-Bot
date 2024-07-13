@@ -14,25 +14,6 @@ module.exports = {
         const guild = message.guild
         var logsID = channel_ids.logs
         var tempusID = guild_id
-
-        client.getUsSett = sql.prepare("SELECT * FROM userSettings WHERE userID = ?");
-        client.setUsSett = sql.prepare("INSERT OR REPLACE INTO userSettings (userID, userAccess, levelNotifications, language) VALUES (@userID, @userAccess, @levelNotifications, @language);");
-        let userset = client.getUsSett.get(message.author.id)
-
-        client.getScore = sql.prepare("SELECT * FROM scores WHERE user = ? AND guild = ?");
-        client.setScore = sql.prepare("INSERT OR REPLACE INTO scores (id, user, guild, points, level) VALUES (@id, @user, @guild, @points, @level);");
-
-        let score;
-        score = client.getScore.get(message.author.id, message.guild.id);
-
-        if(!userset) {
-            userset = { userID: message.author.id, userAccess: 'false', levelNotifications: 'true', language: 'en' };
-            client.setUsSett.run(userset);
-        }
-
-        if(!score) {
-            score = { id: `${message.guild.id}-${message.author.id}`, user: message.author.id, guild: message.guild.id, points: 0, level: 0 };
-        }
         
         if(message.type === 7) {
             if(message.guild.id === tempusID) {
@@ -124,6 +105,25 @@ module.exports = {
                 }
             }
 
+            client.getUsSett = sql.prepare("SELECT * FROM userSettings WHERE userID = ?");
+            client.setUsSett = sql.prepare("INSERT OR REPLACE INTO userSettings (userID, userAccess, levelNotifications, language) VALUES (@userID, @userAccess, @levelNotifications, @language);");
+            let userset = client.getUsSett.get(message.author.id)
+    
+            if(!userset) {
+                sql.close();
+                return;
+            }
+
+            client.getScore = sql.prepare("SELECT * FROM scores WHERE user = ? AND guild = ?");
+            client.setScore = sql.prepare("INSERT OR REPLACE INTO scores (id, user, guild, points, level) VALUES (@id, @user, @guild, @points, @level);");
+    
+            let score;
+            score = client.getScore.get(message.author.id, message.guild.id);
+    
+            if(!score) {
+                score = { id: `${message.guild.id}-${message.author.id}`, user: message.author.id, guild: message.guild.id, points: 0, level: 0 };
+            }
+
             const cooldowns = new Map();
             const cooldown = cooldowns.get(message.author.id);
             if(cooldown) {
@@ -159,6 +159,7 @@ module.exports = {
             }
 
             client.setScore.run(score);
+            sql.close();
             return;
         }
     }

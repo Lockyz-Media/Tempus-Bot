@@ -18,6 +18,11 @@ module.exports = {
 			.setDescription("A user named <@"+user.id+"> left the server.")
 			.setTimestamp();
 		client.channels.cache.get(logsID).send({ embeds: [embed] })
+
+		sql.prepare(`DELETE FROM userSettings WHERE userID = `${user.id})
+		sql.prepare(`DELETE FROM profile WHERE userID = `${user.id})
+		sql.prepare(`DELETE FROM scores WHERE user = `${user.id})
+		sql.close();
 		return;
 	}
 }

@@ -30,21 +30,26 @@ module.exports = {
 			if(!command) {
 				console.error("Command named "+interaction.commandName+" was not found");
 				interaction.reply({ content: "Command named "+interaction.commandName+" was not found"});
+                sql.close();
 				return;
 			}
 
 			try {
 				if(!interaction.guild) {
 					interaction.reply({ content: "Commands can only be used in a guild" })
+                    sql.close();
 					return;
 				} else {
+                    sql.close();
 					await command.execute(interaction);
 				}
 			} catch (error) {
 				console.error(error);
 				if(interaction.replied || interaction.deferred) {
+                    sql.close();
 					await interaction.followUp({ content: "An unknown error has occured", ephemeral: true });
 				} else {
+                    sql.close();
 					await interaction.reply({ content: "An unknown error has occured", ephemeral: true });
 				}
 			}
@@ -70,60 +75,84 @@ module.exports = {
                 if(interaction.values.includes('follow')) {
                     if(member.roles.cache.has(role_menu_ids.follower)) {
                         member.roles.remove(role_menu_ids.follower)
+                        sql.close();
                         interaction.reply({ content: "You no longer have the Follower role", ephemeral: true })
+                        return;
                     } else {
                         member.roles.add(role_menu_ids.follower)
+                        sql.close();
                         interaction.reply({ content: "You now have the Follower role", ephemeral: true })
+                        return;
                     }
                 }
 
             	if(interaction.values.includes('vote')) {
                     if(member.roles.cache.has(role_menu_ids.vote_notif)) {
                         member.roles.remove(role_menu_ids.vote_notif)
+                        sql.close();
                         interaction.reply({ content: "You no longer have the Vote role", ephemeral: true })
+                        return;
                     } else {
                         member.roles.add(role_menu_ids.vote_notif)
+                        sql.close();
                         interaction.reply({ content: "You now have the Vote role", ephemeral: true })
+                        return;
                     }
                 }
 
                 if(interaction.values.includes('sneak_peek')) {
                 	if(member.roles.cache.has(role_menu_ids.sneak_peak)) {
                         member.roles.remove(role_menu_ids.sneak_peak)
+                        sql.close();
                         interaction.reply({ content: "You no longer have the Sneak Peak role", ephemeral: true })
+                        return;
                     } else {
                         member.roles.add(role_menu_ids.sneak_peak)
+                        sql.close();
                         interaction.reply({ content: "You now have the Sneak Peak role", ephemeral: true })
+                        return;
                     }
                 }
 
                 if(interaction.values.includes('vj_health')) {
                     if(member.roles.cache.has(role_menu_ids.vj_health)) {
                         member.roles.remove(role_menu_ids.vj_health)
+                        sql.close();
                         interaction.reply({ content: "You no longer have the Health role", ephemeral: true })
+                        return;
                     } else {
                         member.roles.add(role_menu_ids.vj_health)
+                        sql.close();
                         interaction.reply({ content: "You now have the Health role", ephemeral: true })
+                        return;
                     }
                 }
 				
             	if(interaction.values.includes('tourney')) {
                     if(member.roles.cache.has(role_menu_ids.tourney_notif)) {
                         member.roles.remove(role_menu_ids.tourney_notif)
+                        sql.close();
                         interaction.reply({ content: "You no longer have the Tournament role", ephemeral: true })
+                        return;
                 	} else {
                         member.roles.add(role_menu_ids.tourney_notif)
+                        sql.close();
                         interaction.reply({ content: "You now have the Tournament role", ephemeral: true })
+                        return;
                     }
                 }
 				
             	if(interaction.values.includes('hereForYou')) {
                     if(member.roles.cache.has(role_menu_ids.here_for_you)) {
                         member.roles.remove(role_menu_ids.here_for_you)
+                        sql.close();
                         interaction.reply({ content: "You no longer have the Here for you role", ephemeral: true })
+                        return;
                     } else {
                         member.roles.add(role_menu_ids.here_for_you)
+                        sql.close();
                         interaction.reply({ content: "You now have the Here for you role", ephemeral: true })
+                        return;
                     }
                 }
 			}
@@ -136,10 +165,12 @@ module.exports = {
                 if(!userprof) {
                     userprof = { userID: interaction.user.id, showUsername: 'true', showNickname: 'true', showPresence: 'false', showGuildScore: 'false', showGlobalScore: 'true', showRoles: 'false', description: profDescription, pronouns: profPronouns, country: profCountry, customProfile: 'true'}
                     client.setUsProf.run(userprof);
+                    sql.close();
                     interaction.reply({ content: "Done, you can view your profile with the /userinfo command", ephemeral: true })
                 } else {
                     userprof = { userID: interaction.user.id, showUsername: userprof.showUsername, showNickname: userprof.showNickname, showPresence: userprof.showPresence, showGuildScore: userprof.showGuildScore, showGlobalScore: userprof.showGlobalScore, showRoles: userprof.showRoles, description: profDescription, pronouns: profPronouns, country: profCountry, customProfile: 'true'}
                     client.setUsProf.run(userprof);
+                    sql.close();
                     interaction.reply({ content: "Done, you can view your profile with the /userinfo command", ephemeral: true })
                 }
             }
@@ -150,6 +181,7 @@ module.exports = {
     
                 userset = { userID: interaction.user.id, userAccess: 'false', levelNotifications: levelNotifs, language: languageUser }
                 client.setUsSett.run(userset);
+                sql.close();
                 interaction.reply({ content: 'Your settings have been set.', ephemeral: true })
         	}
 		}

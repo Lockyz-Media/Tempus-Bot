@@ -20,7 +20,7 @@ module.exports = {
 		})*/
 		.setDMPermission(false),
 	async execute(interaction) {
-		commandMetrics(interaction.client, "leaderboard", interaction.guild.id, interaction.user.id)
+		//commandMetrics(interaction.client, "leaderboard", interaction.guild.id, interaction.user.id)
         const client = interaction.client
 
         const table = sql.prepare("SELECT count(*) FROM sqlite_master WHERE type='table' AND name = 'scores';").get();
@@ -77,15 +77,15 @@ module.exports = {
 	
 				if(i <= 6) {
 					if(!user) {
-						embed.addField('\u200b', i.toString()+') **<@'+data.user+'>** with over **'+nFormatter(data.points, 2)+' XP** and at **Level '+nFormatter(data.level, 0)+'**');
+						embed.addFields({ name: '\u200b', value: i.toString()+') **<@'+data.user+'>** with over **'+nFormatter(data.points, 2)+' XP** and at **Level '+nFormatter(data.level, 0)+'**'});
 					} else {
-						embed.addField('\u200b', i.toString()+') **<@'+data.user+'>** with over **'+nFormatter(data.points, 2)+' XP** and at **Level '+nFormatter(data.level, 0)+'**');
+						embed.addFields({ name: '\u200b', value: i.toString()+') **<@'+data.user+'>** with over **'+nFormatter(data.points, 2)+' XP** and at **Level '+nFormatter(data.level, 0)+'**'});
 					}
 				} else {
 					if(!user) {
-						embed.addField('\u200b', i.toString()+') **<@'+data.user+'>** at **Level '+nFormatter(data.level, 0)+'**');
+						embed.addFields({ name: '\u200b', value: i.toString()+') **<@'+data.user+'>** at **Level '+nFormatter(data.level, 0)+'**'});
 					} else {
-						embed.addField('\u200b', i.toString()+') **<@'+data.user+'>** at **Level '+nFormatter(data.level, 0)+'**');
+						embed.addFields({ name: '\u200b', value: i.toString()+') **<@'+data.user+'>** at **Level '+nFormatter(data.level, 0)+'**'});
 					}
 				}
 				i++

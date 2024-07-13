@@ -14,11 +14,11 @@ module.exports = {
 
 		var banReason
 
-			if(ban.reason) {
-				banReason = " banned for "+banReason
-			} else {
-				banReason = "."
-			}
+		if(ban.reason) {
+			banReason = " banned for "+banReason
+		} else {
+			banReason = "."
+		}
 
 		const embed = new EmbedBuilder()
 			.setColor(embed_colours.negative)
